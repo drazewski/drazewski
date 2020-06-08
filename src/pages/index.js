@@ -1,22 +1,44 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
+const BlogPage = () => {
+  const posts = useStaticQuery(graphql`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              date
+              title
+            }
+            excerpt
+            html
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
 
-export default IndexPage
+  return(
+    <Layout>
+      <h1>My personal blog</h1>
+      <p>later add posts!</p>
+      {posts?.allMarkdownRemark?.edges?.length && posts.allMarkdownRemark.edges.map((post) => (
+        <ol key={post.node.id}>
+          <h3><Link to={`/blog/${post.node.fields.slug}`}>{post.node.frontmatter.title}</Link></h3>
+          <p>{post.node.frontmatter.date}</p>
+          <div>{post.node.excerpt}</div>
+        </ol>
+      ))}
+    </Layout>
+  );
+}
+
+export default BlogPage

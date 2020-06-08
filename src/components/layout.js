@@ -7,42 +7,33 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
-import "./layout.css"
+import Footer from "./footer"
+import Main from "./main"
+import RightColumn from "./rightColumn"
+import './layout.css';
+import styled from "styled-components"
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 70% 1fr;
+  margin: auto;
+  max-width: 1030px;
+`
 
-  return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
-  )
-}
+const Layout = ({ children }) => (
+  <>
+    <Header/>
+    <Grid>
+      <Main>
+        {children}
+      </Main>
+      <RightColumn />
+    </Grid>
+    <Footer />
+  </>
+)
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
