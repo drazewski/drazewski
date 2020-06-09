@@ -1,20 +1,25 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
+import Image from "gatsby-image";
+import Layout from "../layout/layout"
 import styled from "styled-components"
 import { colors } from '../shared/constants';
+import { BLOCKS } from "@contentful/rich-text-types";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import useContentfulImage from "../hooks/useContentfulImage";
 
 export const query = graphql`
   query($slug: String!) {
-    markdownRemark(fields: {slug: {eq: $slug}}) {
-      frontmatter {
-        date
-        title
+    contentfulBlogPost(slug: {eq: $slug}) {
+      date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
+      title
+      content {
+        json
       }
-      html
     }
   }
 `
+
 const PostHeader = styled.div`
   text-align: center;
   margin-bottom: 30px;
@@ -40,21 +45,33 @@ const Article = styled.article`
   color: ${colors.textPrimary};
   text-align: justify;
   line-height: 1.75;
-
-  & .gatsby-resp-image-wrapper {
-    margin: 30px 0;
-  }
 `
+
+const IMG = styled(Image)`
+  margin: 30px 0;
+  max-width: 100%;
+`;
+
+const options = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const alt = node.data.target.fields?.title['en-US'];
+      const fluid = useContentfulImage(node.data.target.sys.contentful_id);
+
+      return <IMG alt={alt} fluid={fluid} />
+    }
+  }
+}
 
 const BlogPost = (props) => {
   return (
     <Layout>
         <PostHeader>
-          <Title>{props.data.markdownRemark.frontmatter.title}</Title>
-          <Date>{props.data.markdownRemark.frontmatter.date}</Date>
+          <Title>{props.data.contentfulBlogPost.title}</Title>
+          <Date>{props.data.contentfulBlogPost.date}</Date>
         </PostHeader>
         <Article>
-          <div dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }} />
+          {documentToReactComponents(props.data.contentfulBlogPost.content.json, options)}
         </Article>
     </Layout>
   )

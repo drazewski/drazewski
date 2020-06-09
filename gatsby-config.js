@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV || 'production'}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Personal Blog`,
@@ -5,6 +9,13 @@ module.exports = {
     author: `Lukasz Drazewski`,
   },
   plugins: [
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
+    },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {

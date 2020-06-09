@@ -1,17 +1,11 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
 import PropTypes from "prop-types"
 
-import Header from "./header"
-import Footer from "./footer"
-import Main from "./main"
-import RightColumn from "./rightColumn"
+import Header from "../components/header"
+import HeaderSection from "../components/headerSection"
+import Footer from "../components/footer"
+import Main from "../components/main"
+import RightColumn from "../components/rightColumn"
 import './layout.css';
 import styled from "styled-components"
 
@@ -25,6 +19,7 @@ const Grid = styled.div`
 const Layout = ({ children }) => (
   <>
     <Header/>
+    <HeaderSection />
     <Grid>
       <Main>
         {children}
