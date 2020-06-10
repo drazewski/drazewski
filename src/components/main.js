@@ -5,7 +5,8 @@ import styled from "styled-components"
 
 const MainWrapper = styled.main`
   min-height: calc(100vh - 100px);
-  margin-right: 30px;
+  margin-right: 15px;
+  padding: 15px;
 `;
 
 const Main = ({ children }) => {

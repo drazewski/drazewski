@@ -1,9 +1,13 @@
 import React, { useEffect } from "react"
 import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
+import Image from "gatsby-image";
+import { BLOCKS } from "@contentful/rich-text-types";
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from "styled-components"
 import { colors } from '../shared/constants';
 import Layout from "../layout/layout"
+import { useContentfulImage } from "../hooks";
 
 const PostHeader = styled.div`
   text-align: center;
@@ -47,7 +51,23 @@ const Article = styled.article`
   }
 `
 
-const BlogPage = () => {
+const IMG = styled(Image)`
+  margin: 30px 0;
+  max-width: 100%;
+`;
+
+const options = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const alt = node.data.target.fields?.title['en-US'];
+      const fluid = useContentfulImage(node.data.target.sys.contentful_id);
+
+      return <IMG alt={alt} fluid={fluid} />
+    }
+  }
+}
+
+const BlogPage = (props) => {
   const posts = useStaticQuery(graphql`
     query {
       allContentfulBlogPost(limit: 10, sort: {order: ASC, fields: date}) {
@@ -56,6 +76,9 @@ const BlogPage = () => {
             date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
             slug
             title
+            excerpt {
+              json
+            }
             content {
               json
             }
@@ -65,7 +88,7 @@ const BlogPage = () => {
     }
   `);
 
-  return(
+  return (
     <Layout>
       {posts.allContentfulBlogPost?.edges.length && posts.allContentfulBlogPost.edges.map((post) => (
         <ol key={post.node.slug}>
@@ -74,7 +97,9 @@ const BlogPage = () => {
             <Date>{post.node.date}</Date>
           </PostHeader>
           <Article>
-            <div>{post.node.content.json.content.find((node) => node.nodeType === "paragraph").content[0].value}</div>
+            {documentToReactComponents(post.node.excerpt?.json, options) ||
+              <p>{post.node.content.json.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
+            }
           </Article>
         </ol>
       ))}

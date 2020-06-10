@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image";
 import Layout from "../layout/layout"
@@ -6,7 +6,7 @@ import styled from "styled-components"
 import { colors } from '../shared/constants';
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import useContentfulImage from "../hooks/useContentfulImage";
+import { useContentfulImage } from "../hooks";
 
 export const query = graphql`
   query($slug: String!) {
@@ -41,10 +41,8 @@ const Date = styled.span`
   font: 12px Lora;
 `
 const Article = styled.article`
-  font-size: 17px;
   color: ${colors.textPrimary};
   text-align: justify;
-  line-height: 1.75;
 `
 
 const IMG = styled(Image)`
@@ -71,7 +69,7 @@ const BlogPost = (props) => {
           <Date>{props.data.contentfulBlogPost.date}</Date>
         </PostHeader>
         <Article>
-          {documentToReactComponents(props.data.contentfulBlogPost.content.json, options)}
+           {documentToReactComponents(props.data.contentfulBlogPost.content.json, options)}
         </Article>
     </Layout>
   )

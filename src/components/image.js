@@ -4,7 +4,7 @@ import Image from "gatsby-image";
 import styled from "styled-components"
 
 const ExportedImage = styled(Image)`
-  width: 150px;
+  width: 100px;
   margin: auto;
 `
 

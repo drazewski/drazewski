@@ -20,12 +20,8 @@ const Wrapper = styled.div`
   align-items: center;
   height: 100%;
   margin: 0 auto;
-  max-width: 1030px;
+  max-width: 990px;
   padding: 0 20px;
-`;
-
-const PageTitle = styled.h1`
-  margin: 0;
 `;
 
 const StyledLink = styled(Link)`
@@ -65,7 +61,6 @@ const MenuItem = styled.li`
 const Social = styled.div`
   color: ${colors.textPrimary};
   font-size: 14px !important;
-  padding: 0 20px;
 `;
 
 const Header = ({ siteTitle }) => {
@@ -93,6 +88,11 @@ const Header = ({ siteTitle }) => {
             <MenuItem>
               <StyledLink to="/about">
                 {'O mnie'}
+              </StyledLink>
+            </MenuItem>
+            <MenuItem>
+              <StyledLink to="/faq">
+                {'Pytania'}
               </StyledLink>
             </MenuItem>
             <MenuItem>
