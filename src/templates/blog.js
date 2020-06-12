@@ -7,6 +7,8 @@ import { colors } from '../shared/constants';
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useContentfulImage } from "../hooks";
+import MainTitle from '../components/mainTitle';
+import PostDate from '../components/postDate';
 
 export const query = graphql`
   query($slug: String!) {
@@ -25,21 +27,6 @@ const PostHeader = styled.div`
   margin-bottom: 30px;
 `
 
-const Title = styled.h1`
-  font-size: 30px;
-  font-weight: 300;
-  color: ${colors.headingsPrimary};
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-align: center;
-`
-
-const Date = styled.span`
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: ${colors.textLight};
-  font: 12px Lora;
-`
 const Article = styled.article`
   color: ${colors.textPrimary};
   text-align: justify;
@@ -65,8 +52,8 @@ const BlogPost = (props) => {
   return (
     <Layout>
         <PostHeader>
-          <Title>{props.data.contentfulBlogPost.title}</Title>
-          <Date>{props.data.contentfulBlogPost.date}</Date>
+          <MainTitle>{props.data.contentfulBlogPost.title}</MainTitle>
+          <PostDate date={props.data.contentfulBlogPost.date} />
         </PostHeader>
         <Article>
            {documentToReactComponents(props.data.contentfulBlogPost.content.json, options)}

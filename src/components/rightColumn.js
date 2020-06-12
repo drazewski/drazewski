@@ -46,7 +46,7 @@ const RightColumn = () => {
       <WidgetArea>
         <SidebarTitle title="To ja" />
         <IMG fluid={query.file.childImageSharp.fluid} />
-        <Text>Cześć, nazywam się Lech Wałęsa a to jest mój blog o karmieniu piersią. Bardzo lubię karmić piersią i mam duże cycki. </Text>
+        <Text>Cześć, nazywam się Ania Drązewska a to jest mój blog o karmieniu piersią. Bardzo lubię karmić piersią i mam duże cycki. </Text>
       </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Często czytane" />

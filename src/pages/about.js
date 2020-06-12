@@ -1,19 +1,69 @@
 import React from "react"
-import { Link } from "gatsby"
-
+import Image from "gatsby-image";
+import styled from "styled-components"
+import { useStaticQuery, graphql } from "gatsby"
 import PagesLayout from "../layout/pagesLayout"
+import MainTitle from '../components/mainTitle';
 
-const AboutPage = () => (
-  <PagesLayout>
-      <h1>Bio!</h1>
-      <p>Im front end dev!</p>
-      <p><span>You can find me on: </span>
-        <Link to='https://www.facebook.com/profile.php?id=100019374288075'>Facebook</Link>
-        {' | '}
-        <Link to='https://www.instagram.com/lukasz_drazewski/?hl=pl'>Instagram</Link>
-      </p>
-      <p>If you want to contact me feel free to write my email. <Link to='/contact'>See contact details</Link></p>
-  </PagesLayout>
-)
+const Flex = styled.div`
+  display: flex;
+`
+
+const IMG = styled(Image)`
+  margin: auto;
+  max-width: 250px;
+`;
+
+const ImageWrapper = styled.div`
+  flex: 2;
+  padding: 40px 20px;
+`;
+
+const TextWrapper = styled.div`
+  flex: 3;
+  padding: 40px 20px;
+  text-align: center;
+`
+
+const AboutPage = () => {
+  const query = useStaticQuery(graphql`
+    {
+      file(relativePath: { eq: "personal-photo.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 300) {
+            ...GatsbyImageSharpFluid
+          }
+          fixed {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+
+      allContentfulPages(filter: {slug: {eq: "about"}}) {
+        edges {
+          node {
+            pageContent {
+              json
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  return (
+    <PagesLayout>
+        <MainTitle>Mam na imię Ania</MainTitle>
+        <Flex>
+          <ImageWrapper>
+            <IMG fluid={query.file.childImageSharp.fluid} />
+          </ImageWrapper>
+          <TextWrapper>
+          <pre>{JSON.stringify(query.allContentfulPages.edges.node.pageContent.json, null, 4)}</pre>
+          </TextWrapper>
+        </Flex>
+    </PagesLayout>
+  );
+}
 
 export default AboutPage

@@ -8,6 +8,8 @@ import styled from "styled-components"
 import { colors } from '../shared/constants';
 import Layout from "../layout/layout"
 import { useContentfulImage } from "../hooks";
+import MainTitle from '../components/mainTitle';
+import PostDate from '../components/postDate';
 
 const PostHeader = styled.div`
   text-align: center;
@@ -24,25 +26,23 @@ const StyledLink = styled(Link)`
     }
 `;
 
-const Title = styled.h1`
-  font-size: 30px;
-  font-weight: 300;
-  color: ${colors.headingsPrimary};
-  letter-spacing: 2px;
+const ReadMoreLink = styled(Link)`
+  display: block;
+  font-size: 13px;
   text-transform: uppercase;
   text-align: center;
-`
+  color: inherit;
+  transition: 0.3s;
 
-const Date = styled.span`
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: ${colors.textLight};
-  font: 12px Lora;
-`
+    &:hover {
+      opacity: 0.5;
+    }
+`;
+
 const Article = styled.article`
   font-size: 17px;
   color: ${colors.textPrimary};
-  margin-bottom: 100px;
+  margin-bottom: 60px;
   text-align: justify;
   line-height: 1.75;
 
@@ -67,10 +67,10 @@ const options = {
   }
 }
 
-const BlogPage = (props) => {
+const BlogPage = () => {
   const posts = useStaticQuery(graphql`
     query {
-      allContentfulBlogPost(limit: 10, sort: {order: ASC, fields: date}) {
+      allContentfulBlogPost(limit: 5, sort: {order: DESC, fields: date}) {
         edges {
           node {
             date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
@@ -93,13 +93,15 @@ const BlogPage = (props) => {
       {posts.allContentfulBlogPost?.edges.length && posts.allContentfulBlogPost.edges.map((post) => (
         <ol key={post.node.slug}>
           <PostHeader>
-            <Title><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></Title>
-            <Date>{post.node.date}</Date>
+            <MainTitle><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></MainTitle>
+            <PostDate date={post.node.date} />
           </PostHeader>
           <Article>
-            {documentToReactComponents(post.node.excerpt?.json, options) ||
-              <p>{post.node.content.json.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
+            {post.node.excerpt
+              ? documentToReactComponents(post.node.excerpt?.json, options)
+              : <p>{post.node.content.json.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
             }
+            <ReadMoreLink to={`/blog/${post.node.slug}`}>Przeczytaj całość...</ReadMoreLink>
           </Article>
         </ol>
       ))}

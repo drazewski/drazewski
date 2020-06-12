@@ -24,19 +24,7 @@ const Wrapper = styled.div`
 
 const Uppercase = styled.span`
   text-transform: uppercase;
-`;
-
-const StyledLink = styled(Link)`
-  color: ${colors.textSecondary};
-  letter-spacing: 2px;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 0 10px 4px 10px;
-  transition: 0.3s;
-
-    &:hover {
-      opacity: 0.5;
-    }
+  padding-right: 10px;
 `;
 
 const Footer = ({ siteTitle }) => {
@@ -44,11 +32,10 @@ const Footer = ({ siteTitle }) => {
     <FooterComponent>
       <Wrapper>
         <span>Wszystkie prawa zastrzeżone © {new Date().getFullYear()}</span>
-        <Uppercase>Na górę<Link href="">
-          <StyledLink>
-            <FontAwesomeIcon icon={faArrowAltCircleUp} />
-          </StyledLink>
-        </Link></Uppercase>
+        <span>
+          <Uppercase>Na górę</Uppercase>
+          <FontAwesomeIcon icon={faArrowAltCircleUp} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+        </span>
       </Wrapper>
     </FooterComponent>
   )
