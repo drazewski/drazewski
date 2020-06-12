@@ -16,7 +16,6 @@ const Grid = styled.div`
 const PagesLayout = ({ children }) => (
   <>
     <Header/>
-    <HeaderSection />
     <Grid>
       <Main>
         {children}

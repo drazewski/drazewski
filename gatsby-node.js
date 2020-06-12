@@ -18,6 +18,22 @@ module.exports.createPages = async ({ graphql, actions }) => {
         }
     `)
 
+    const posts = res.data.allContentfulBlogPost.edges;
+    const postsPerPage = 5
+    const numPages = Math.ceil(posts.length / postsPerPage)
+    Array.from({ length: numPages }).forEach((_, i) => {
+        createPage({
+            path: i === 0 ? `/` : `/strona/${i + 1}`,
+            component: path.resolve("./src/pages/index.js"),
+            context: {
+                limit: postsPerPage,
+                skip: i * postsPerPage,
+                numPages,
+                currentPage: i + 1,
+            },
+        })
+    })
+
     res.data.allContentfulBlogPost.edges.forEach(edge => {
         createPage({
             component: blogTemplate,

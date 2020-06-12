@@ -3,12 +3,13 @@ import Image from "gatsby-image";
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import SidebarTitle from './sidebarTitle'
+import FeaturedPost from './featuredPost'
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);
   max-width: 1030px;
   margin: 0 auto;
-  padding: 30px 0 30px 10px;
+  padding: 30px 0;
   width: calc(100% - 60px);
 `;
 
@@ -38,9 +39,22 @@ const RightColumn = () => {
           }
         }
       }
+
+      allContentfulBlogPost(filter: {featured: {eq: true}}, sort: {order: ASC, fields: date}) {
+        edges {
+          node {
+            date(formatString: "DD MMM YYYY", locale: "pl")
+            slug
+            title
+            content {
+              json
+            }
+          }
+        }
+      }
     }
   `);
-
+console.log(query.allContentfulBlogPost.edges)
   return(
     <Aside>
       <WidgetArea>
@@ -50,6 +64,7 @@ const RightColumn = () => {
       </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Często czytane" />
+        {query.allContentfulBlogPost.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
       </WidgetArea>
     </Aside>
   )

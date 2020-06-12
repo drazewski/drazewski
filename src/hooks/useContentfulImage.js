@@ -18,5 +18,5 @@ export default contentful_id => {
     `
   );
 
-  return allContentfulAsset.nodes.find(n => n.file.url.includes(contentful_id))?.fluid || {};
+  return allContentfulAsset.nodes.find(n => n.file.url.includes(contentful_id))?.fluid || null;
 };

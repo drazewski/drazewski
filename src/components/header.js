@@ -1,6 +1,6 @@
+import React from "react"
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useEffect } from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -35,6 +35,17 @@ const StyledLink = styled(Link)`
     &[aria-current="page"] {
       color: ${colors.headingsPrimary};
     }
+
+    &:hover {
+      opacity: 0.5;
+    }
+`;
+
+const StyledOuterLink = styled.a`
+  color: ${colors.textSecondary};
+  padding: 0 15px 4px 0px;
+  transition: 0.3s;
+  cursor: pointer;
 
     &:hover {
       opacity: 0.5;
@@ -86,7 +97,7 @@ const Header = ({ siteTitle }) => {
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink to="/about">
+              <StyledLink to="/o-mnie">
                 {'O mnie'}
               </StyledLink>
             </MenuItem>
@@ -96,19 +107,19 @@ const Header = ({ siteTitle }) => {
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink to="/contact">
+              <StyledLink to="/kontakt">
                 {'Kontakt'}
               </StyledLink>
             </MenuItem>
           </MenuList>
         </Menu>
         <Social>
-          <StyledLink>
+          <StyledOuterLink>
             <FontAwesomeIcon icon={faFacebookF} />
-          </StyledLink>
-          <StyledLink>
+          </StyledOuterLink>
+          <StyledOuterLink>
             <FontAwesomeIcon icon={faEnvelope} />
-          </StyledLink>
+          </StyledOuterLink>
         </Social>
       </Wrapper>
     </HeaderComponent>

@@ -5,7 +5,7 @@ import Image from './image';
 import styled from "styled-components"
 
 const HeaderSectionWrapper = styled.section`
-  margin: 40px auto;
+  margin: 10px auto;
   max-width: 1030px;
   padding: 0 20px;
 `;

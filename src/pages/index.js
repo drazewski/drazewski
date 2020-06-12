@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
 import Image from "gatsby-image";
@@ -31,6 +31,7 @@ const ReadMoreLink = styled(Link)`
   font-size: 13px;
   text-transform: uppercase;
   text-align: center;
+  text-decoration: underline;
   color: inherit;
   transition: 0.3s;
 
@@ -56,6 +57,40 @@ const IMG = styled(Image)`
   max-width: 100%;
 `;
 
+const Pagination = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const PaginationLink = styled(Link)`
+  padding: 0 8px;
+`;
+
+const PaginationItem = styled.span`
+  color: ${colors.textLight};
+  padding: 0 8px;
+`;
+
+export const posts = graphql`
+  query($limit: Int!, $skip: Int!) {
+    allContentfulBlogPost(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
+      edges {
+        node {
+          date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
+          slug
+          title
+          excerpt {
+            json
+          }
+          content {
+            json
+          }
+        }
+      }
+    }
+  }
+`;
+
 const options = {
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
@@ -67,30 +102,23 @@ const options = {
   }
 }
 
-const BlogPage = () => {
-  const posts = useStaticQuery(graphql`
-    query {
-      allContentfulBlogPost(limit: 5, sort: {order: DESC, fields: date}) {
-        edges {
-          node {
-            date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
-            slug
-            title
-            excerpt {
-              json
-            }
-            content {
-              json
-            }
-          }
-        }
-      }
+const BlogPage = (props) => {
+  const [pageArray, setPageArray] = useState([]);
+  const { currentPage, numPages } = props.pageContext;
+
+  useEffect(() => {
+    const pages = [];
+console.log(props)
+    for (let i=1; i<=numPages; i++) {
+      pages.push(i);
     }
-  `);
+
+    setPageArray(pages)
+  }, []);
 
   return (
     <Layout>
-      {posts.allContentfulBlogPost?.edges.length && posts.allContentfulBlogPost.edges.map((post) => (
+      {props.data.allContentfulBlogPost.edges.length && props.data.allContentfulBlogPost.edges.map((post) => (
         <ol key={post.node.slug}>
           <PostHeader>
             <MainTitle><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></MainTitle>
@@ -105,6 +133,17 @@ const BlogPage = () => {
           </Article>
         </ol>
       ))}
+      {numPages > 1 &&
+        <Pagination>
+          {pageArray.map(element => (
+            element !== currentPage ? (
+            <PaginationLink to={element === 1 ? `/` : `/strona/${element}`} key={element}>{element}</PaginationLink>
+            ) : (
+            <PaginationItem key={element}>{element}</PaginationItem>
+            )
+          ))}
+        </Pagination>
+      }
     </Layout>
   );
 }

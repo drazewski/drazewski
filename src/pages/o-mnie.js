@@ -2,6 +2,7 @@ import React from "react"
 import Image from "gatsby-image";
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import PagesLayout from "../layout/pagesLayout"
 import MainTitle from '../components/mainTitle';
 
@@ -39,13 +40,9 @@ const AboutPage = () => {
         }
       }
 
-      allContentfulPages(filter: {slug: {eq: "about"}}) {
-        edges {
-          node {
-            pageContent {
-              json
-            }
-          }
+      contentfulPages(slug: {eq: "o-mnie"}) {
+        pageContent {
+          json
         }
       }
     }
@@ -59,7 +56,7 @@ const AboutPage = () => {
             <IMG fluid={query.file.childImageSharp.fluid} />
           </ImageWrapper>
           <TextWrapper>
-          <pre>{JSON.stringify(query.allContentfulPages.edges.node.pageContent.json, null, 4)}</pre>
+            {documentToReactComponents(query.contentfulPages.pageContent.json)}
           </TextWrapper>
         </Flex>
     </PagesLayout>

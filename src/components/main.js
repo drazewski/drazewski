@@ -5,7 +5,7 @@ import styled from "styled-components"
 
 const MainWrapper = styled.main`
   min-height: calc(100vh - 100px);
-  margin-right: 15px;
+  margin: 0 15px 50px 0;
   padding: 15px;
 `;
 
