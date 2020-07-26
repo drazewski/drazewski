@@ -1,10 +1,10 @@
 import { graphql, useStaticQuery } from "gatsby";
 
 export default contentful_id => {
-  const { allContentfulBlogPost } = useStaticQuery(
+  const { allContentfulWinePost } = useStaticQuery(
     graphql`
         query($id: String) {
-            allContentfulBlogPost(filter: {id: {eq: $id}}) {
+            allContentfulWinePost(filter: {id: {eq: $id}}) {
                 edges {
                     node {
                         id
@@ -18,6 +18,6 @@ export default contentful_id => {
     `
   );
   console.error('id:', contentful_id)
-console.warn(allContentfulBlogPost.edges)
-  return allContentfulBlogPost.edges.find(edge => edge.node.id === contentful_id)?.node.content.content;
+console.warn(allContentfulWinePost.edges)
+  return allContentfulWinePost.edges.find(edge => edge.node.id === contentful_id)?.node.content.content;
 };

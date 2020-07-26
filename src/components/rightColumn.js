@@ -18,7 +18,7 @@ const IMG = styled(Image)`
 `;
 
 const Text = styled.p`
-  font-size: 16px;
+  font-size: 14px;
   margin: 20px 0;
 `;
 
@@ -40,7 +40,7 @@ const RightColumn = () => {
         }
       }
 
-      allContentfulBlogPost(filter: {featured: {eq: true}}, sort: {order: ASC, fields: date}) {
+      allContentfulWinePost(filter: {featured: {eq: true}}, sort: {order: ASC, fields: date}) {
         edges {
           node {
             date(formatString: "DD MMM YYYY", locale: "pl")
@@ -54,17 +54,19 @@ const RightColumn = () => {
       }
     }
   `);
-console.log(query.allContentfulBlogPost.edges)
+
   return(
     <Aside>
       <WidgetArea>
         <SidebarTitle title="To ja" />
         <IMG fluid={query.file.childImageSharp.fluid} />
-        <Text>Cześć, nazywam się Ania Drązewska a to jest mój blog o karmieniu piersią. Bardzo lubię karmić piersią i mam duże cycki. </Text>
+        <Text>
+          Cześć! Nazywam się Łukasz Drążewski. Witaj na moim blogu poświęconym winu. Znajdziesz tu opisy przede wszystkim win z popularnych sieci handlowych, ale także win mniej znanych i trudniej dostępnych. I choć osobiście preferuję wina białe, wytrawne i półwytrawne, to zdarza mi się od czasu do czasu pić wina czerwone. Za każdym razem jednak co zdegustuję to na blogu opisuję :)   
+        </Text>
       </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Często czytane" />
-        {query.allContentfulBlogPost.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
+        {query.allContentfulWinePost.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
       </WidgetArea>
     </Aside>
   )

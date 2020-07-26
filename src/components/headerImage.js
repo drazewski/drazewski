@@ -4,16 +4,15 @@ import Image from "gatsby-image";
 import styled from "styled-components"
 
 const ExportedImage = styled(Image)`
-  width: 400px;
   margin: auto;
 `
 
 const HeaderImage = () => {
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "main-image5.png" }) {
+      placeholderImage: file(relativePath: { eq: "grapes.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 400) {
+          fluid(maxWidth: 1800) {
             ...GatsbyImageSharpFluid
           }
         }

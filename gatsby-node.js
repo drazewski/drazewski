@@ -8,7 +8,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
     const blogTemplate = path.resolve('./src/templates/blog.js');
     const res = await graphql(`
         query {
-            allContentfulBlogPost {
+            allContentfulWinePost {
                 edges {
                     node {
                         slug
@@ -18,8 +18,8 @@ module.exports.createPages = async ({ graphql, actions }) => {
         }
     `)
 
-    const posts = res.data.allContentfulBlogPost.edges;
-    const postsPerPage = 5
+    const posts = res.data.allContentfulWinePost.edges;
+    const postsPerPage = 7;
     const numPages = Math.ceil(posts.length / postsPerPage)
     Array.from({ length: numPages }).forEach((_, i) => {
         createPage({
@@ -34,7 +34,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
         })
     })
 
-    res.data.allContentfulBlogPost.edges.forEach(edge => {
+    res.data.allContentfulWinePost.edges.forEach(edge => {
         createPage({
             component: blogTemplate,
             path: `/blog/${edge.node.slug}`,

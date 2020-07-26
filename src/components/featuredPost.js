@@ -42,7 +42,7 @@ const Meta = styled.div`
 const FeaturedPost = ({ post }) => {
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "main-image5.png" }) {
+      placeholderImage: file(relativePath: { eq: "grapes.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 300) {
             ...GatsbyImageSharpFluid

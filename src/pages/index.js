@@ -72,8 +72,8 @@ const PaginationItem = styled.span`
 `;
 
 export const posts = graphql`
-  query($limit: Int!, $skip: Int!) {
-    allContentfulBlogPost(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
+  query posts($limit: Int!, $skip: Int!) {
+    allContentfulWinePost(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
       edges {
         node {
           date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
@@ -108,7 +108,7 @@ const BlogPage = (props) => {
 
   useEffect(() => {
     const pages = [];
-console.log(props)
+
     for (let i=1; i<=numPages; i++) {
       pages.push(i);
     }
@@ -118,7 +118,7 @@ console.log(props)
 
   return (
     <Layout>
-      {props.data.allContentfulBlogPost.edges.length && props.data.allContentfulBlogPost.edges.map((post) => (
+      {props.data.allContentfulWinePost.edges.length && props.data.allContentfulWinePost.edges.map((post) => (
         <ol key={post.node.slug}>
           <PostHeader>
             <MainTitle><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></MainTitle>

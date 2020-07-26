@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image";
-import Layout from "../layout/layout"
+import PostsLayout from "../layout/postsLayout"
 import styled from "styled-components"
 import { colors } from '../shared/constants';
 import { BLOCKS } from "@contentful/rich-text-types";
@@ -12,7 +12,7 @@ import PostDate from '../components/postDate';
 
 export const query = graphql`
   query($slug: String!) {
-    contentfulBlogPost(slug: {eq: $slug}) {
+    contentfulWinePost(slug: {eq: $slug}) {
       date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
       title
       content {
@@ -35,6 +35,11 @@ const Article = styled.article`
 const IMG = styled(Image)`
   margin: 30px 0;
   max-width: 100%;
+  max-height: 75vh;
+
+  & img {
+    object-fit: contain !important;
+  }
 `;
 
 const options = {
@@ -50,15 +55,17 @@ const options = {
 
 const BlogPost = (props) => {
   return (
-    <Layout>
+    <PostsLayout
+      postTitle={props.data.contentfulWinePost.title}
+    >
         <PostHeader>
-          <MainTitle>{props.data.contentfulBlogPost.title}</MainTitle>
-          <PostDate date={props.data.contentfulBlogPost.date} />
+          <MainTitle>{props.data.contentfulWinePost.title}</MainTitle>
+          <PostDate date={props.data.contentfulWinePost.date} />
         </PostHeader>
         <Article>
-           {documentToReactComponents(props.data.contentfulBlogPost.content.json, options)}
+           {documentToReactComponents(props.data.contentfulWinePost.content.json, options)}
         </Article>
-    </Layout>
+    </PostsLayout>
   )
 }
 

@@ -4,14 +4,13 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
+import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { colors } from '../shared/constants';
 
 const HeaderComponent = styled.header`
   background: ${colors.backgroundPrimary};
   height: 48px;
-  margin-bottom: 1.45rem;
 `;
 
 const Wrapper = styled.div`
@@ -29,7 +28,7 @@ const StyledLink = styled(Link)`
   letter-spacing: 2px;
   text-decoration: none;
   text-transform: uppercase;
-  padding: 0 15px 4px 0px;
+  padding: 0 25px 4px 0px;
   transition: 0.3s;
 
     &[aria-current="page"] {
@@ -93,7 +92,7 @@ const Header = ({ siteTitle }) => {
           <MenuList>
           <MenuItem>
               <StyledLink to="/">
-                {'Home'}
+                {'Blog'}
               </StyledLink>
             </MenuItem>
             <MenuItem>
@@ -102,8 +101,8 @@ const Header = ({ siteTitle }) => {
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink to="/faq">
-                {'Pytania'}
+              <StyledLink to="/wina">
+                {'Wszystkie wina'}
               </StyledLink>
             </MenuItem>
             <MenuItem>
@@ -116,6 +115,9 @@ const Header = ({ siteTitle }) => {
         <Social>
           <StyledOuterLink>
             <FontAwesomeIcon icon={faFacebookF} />
+          </StyledOuterLink>
+          <StyledOuterLink>
+            <FontAwesomeIcon icon={faInstagram} />
           </StyledOuterLink>
           <StyledOuterLink>
             <FontAwesomeIcon icon={faEnvelope} />
