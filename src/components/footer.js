@@ -31,9 +31,9 @@ const Footer = ({ siteTitle }) => {
   return(
     <FooterComponent>
       <Wrapper>
-        <span>Wszystkie prawa zastrzeżone © {new Date().getFullYear()}</span>
+        <span>All rights reserved © {new Date().getFullYear()}</span>
         <span>
-          <Uppercase>Na górę</Uppercase>
+          <Uppercase>Go up</Uppercase>
           <FontAwesomeIcon icon={faArrowAltCircleUp} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
         </span>
       </Wrapper>

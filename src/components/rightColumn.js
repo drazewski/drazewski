@@ -40,7 +40,7 @@ const RightColumn = () => {
         }
       }
 
-      allContentfulWinePost(filter: {featured: {eq: true}}, sort: {order: ASC, fields: date}) {
+      allContentfulBlogPosts(filter: {featured: {eq: true}}) {
         edges {
           node {
             date(formatString: "DD MMM YYYY", locale: "pl")
@@ -58,15 +58,15 @@ const RightColumn = () => {
   return(
     <Aside>
       <WidgetArea>
-        <SidebarTitle title="To ja" />
+        <SidebarTitle title="Here I Am" />
         <IMG fluid={query.file.childImageSharp.fluid} />
         <Text>
-          Cześć! Nazywam się Łukasz Drążewski. Witaj na moim blogu poświęconym winu. Znajdziesz tu opisy przede wszystkim win z popularnych sieci handlowych, ale także win mniej znanych i trudniej dostępnych. I choć osobiście preferuję wina białe, wytrawne i półwytrawne, to zdarza mi się od czasu do czasu pić wina czerwone. Za każdym razem jednak co zdegustuję to na blogu opisuję :)   
+          Hi!   
         </Text>
       </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Często czytane" />
-        {query.allContentfulWinePost.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
+        {query.allContentfulBlogPosts.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
       </WidgetArea>
     </Aside>
   )

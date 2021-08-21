@@ -96,18 +96,13 @@ const Header = ({ siteTitle }) => {
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink to="/o-mnie">
-                {'O mnie'}
+              <StyledLink to="/about">
+                {'About me'}
               </StyledLink>
             </MenuItem>
             <MenuItem>
-              <StyledLink to="/wina">
-                {'Wszystkie wina'}
-              </StyledLink>
-            </MenuItem>
-            <MenuItem>
-              <StyledLink to="/kontakt">
-                {'Kontakt'}
+              <StyledLink to="/contact">
+                {'Contact'}
               </StyledLink>
             </MenuItem>
           </MenuList>

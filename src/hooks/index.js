@@ -1,7 +1,7 @@
-import usecontentfulWinePostContentRichTextNode from "./usecontentfulWinePostContentRichTextNode";
+import useContentfulBlogPostsContentRichTextNode from "./useContentfulBlogPostsContentRichTextNode";
 import useContentfulImage from "./useContentfulImage";
 
 export {
-    usecontentfulWinePostContentRichTextNode,
+    useContentfulBlogPostsContentRichTextNode,
     useContentfulImage
 }

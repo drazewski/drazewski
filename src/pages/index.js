@@ -73,14 +73,14 @@ const PaginationItem = styled.span`
 
 export const posts = graphql`
   query posts($limit: Int!, $skip: Int!) {
-    allContentfulWinePost(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
+    allContentfulBlogPosts(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
       edges {
         node {
           date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
           slug
           title
           excerpt {
-            json
+            excerpt
           }
           content {
             json
@@ -118,7 +118,7 @@ const BlogPage = (props) => {
 
   return (
     <Layout>
-      {props.data.allContentfulWinePost.edges.length && props.data.allContentfulWinePost.edges.map((post) => (
+      {props.data.allContentfulBlogPosts.edges.length && props.data.allContentfulBlogPosts.edges.map((post) => (
         <ol key={post.node.slug}>
           <PostHeader>
             <MainTitle><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></MainTitle>

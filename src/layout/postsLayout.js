@@ -5,13 +5,12 @@ import Header from "../components/header"
 import HeaderSection from "../components/headerSection"
 import Footer from "../components/footer"
 import Main from "../components/main"
-import PostsDetails from "../components/postsDetails"
 import './layout.css';
 import styled from "styled-components"
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 70% 1fr;
+  grid-template-columns: 1fr;
   margin: auto;
   max-width: 1030px;
 `
@@ -24,9 +23,6 @@ const PostsLayout = ({ postTitle, children }) => (
       <Main>
         {children}
       </Main>
-      <PostsDetails
-        postTitle={postTitle}
-      />
     </Grid>
     <Footer />
   </>

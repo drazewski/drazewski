@@ -12,7 +12,7 @@ import PostDate from '../components/postDate';
 
 export const query = graphql`
   query($slug: String!) {
-    contentfulWinePost(slug: {eq: $slug}) {
+    contentfulBlogPosts(slug: {eq: $slug}) {
       date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
       title
       content {
@@ -25,12 +25,12 @@ export const query = graphql`
 const PostHeader = styled.div`
   text-align: center;
   margin-bottom: 30px;
-`
+`;
 
 const Article = styled.article`
   color: ${colors.textPrimary};
   text-align: justify;
-`
+`;
 
 const IMG = styled(Image)`
   margin: 30px 0;
@@ -56,14 +56,14 @@ const options = {
 const BlogPost = (props) => {
   return (
     <PostsLayout
-      postTitle={props.data.contentfulWinePost.title}
+      postTitle={props.data.contentfulBlogPosts.title}
     >
         <PostHeader>
-          <MainTitle>{props.data.contentfulWinePost.title}</MainTitle>
-          <PostDate date={props.data.contentfulWinePost.date} />
+          <MainTitle>{props.data.contentfulBlogPosts.title}</MainTitle>
+          <PostDate date={props.data.contentfulBlogPosts.date} />
         </PostHeader>
         <Article>
-           {documentToReactComponents(props.data.contentfulWinePost.content.json, options)}
+           {documentToReactComponents(props.data.contentfulBlogPosts.content.json, options)}
         </Article>
     </PostsLayout>
   )
