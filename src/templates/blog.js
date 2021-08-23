@@ -13,7 +13,7 @@ import PostDate from '../components/postDate';
 export const query = graphql`
   query($slug: String!) {
     contentfulBlogPosts(slug: {eq: $slug}) {
-      date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
+      date(formatString: "MMM DD, YYYY", locale: "en")
       title
       content {
         raw

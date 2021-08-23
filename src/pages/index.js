@@ -76,7 +76,7 @@ export const posts = graphql`
     allContentfulBlogPosts(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
       edges {
         node {
-          date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
+          date(formatString: "MMM DD, YYYY", locale: "en")
           slug
           title
           excerpt {
@@ -129,7 +129,7 @@ const BlogPage = (props) => {
               ? post.node.excerpt.excerpt
               : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
             }
-            <ReadMoreLink to={`/blog/${post.node.slug}`}>Przeczytaj całość...</ReadMoreLink>
+            <ReadMoreLink to={`/blog/${post.node.slug}`}>Read more...</ReadMoreLink>
           </Article>
         </ol>
       ))}
