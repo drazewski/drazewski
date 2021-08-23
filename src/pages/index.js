@@ -76,7 +76,7 @@ export const posts = graphql`
     allContentfulBlogPosts(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
       edges {
         node {
-          date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
+          date(formatString: "MMM DD, YYYY", locale: "en")
           slug
           title
           excerpt {

@@ -42,7 +42,7 @@ const RightColumn = () => {
       allContentfulBlogPosts(filter: {featured: {eq: true}}) {
         edges {
           node {
-            date(formatString: "DD MMM YYYY", locale: "pl")
+            date(formatString: "MMM DD, YYYY", locale: "en")
             slug
             title
             content {
@@ -72,7 +72,7 @@ const RightColumn = () => {
         </Text>
       </WidgetArea>
       <WidgetArea>
-        <SidebarTitle title="Często czytane" />
+        <SidebarTitle title="Random posts" />
         {query.allContentfulBlogPosts.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
       </WidgetArea>
     </Aside>
