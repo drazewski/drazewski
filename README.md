@@ -1,3 +1,3 @@
 <h3>
-  My personal blog based on [Gatsby's default starter](https://www.gatsbyjs.org/docs/gatsby-starters/).
+  My personal blog based on <a href="https://www.gatsbyjs.org/docs/gatsby-starters/">Gatsby's default starter</a>.
 </h3>
