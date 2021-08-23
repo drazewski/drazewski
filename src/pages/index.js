@@ -83,7 +83,7 @@ export const posts = graphql`
             excerpt
           }
           content {
-            json
+            raw
           }
         }
       }
@@ -126,8 +126,8 @@ const BlogPage = (props) => {
           </PostHeader>
           <Article>
             {post.node.excerpt
-              ? documentToReactComponents(post.node.excerpt?.json, options)
-              : <p>{post.node.content.json.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
+              ? documentToReactComponents(JSON.parse(post.node.excerpt?.raw), options)
+              : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
             }
             <ReadMoreLink to={`/blog/${post.node.slug}`}>Przeczytaj całość...</ReadMoreLink>
           </Article>

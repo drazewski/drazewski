@@ -21,7 +21,7 @@ const ContactPage = () => {
     {
       contentfulPages(slug: {eq: "kontakt"}) {
         pageContent {
-          json
+          raw
         }
       }
     }
@@ -32,7 +32,7 @@ const ContactPage = () => {
         <MainTitle>Kontakt ze mną</MainTitle>
         <Flex>
           <TextWrapper>
-            {documentToReactComponents(query.contentfulPages.pageContent.json)}
+            {documentToReactComponents(JSON.parse(query.contentfulPages.pageContent.raw))}
           </TextWrapper>
         </Flex>
     </PagesLayout>

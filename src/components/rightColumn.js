@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "gatsby-image";
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import SidebarTitle from './sidebarTitle'
@@ -13,7 +12,7 @@ const Aside = styled.aside`
   width: calc(100% - 60px);
 `;
 
-const IMG = styled(Image)`
+const IMG = styled.img`
   max-width: 100%;
 `;
 
@@ -47,8 +46,16 @@ const RightColumn = () => {
             slug
             title
             content {
-              json
+              raw
             }
+          }
+        }
+      }
+
+      allContentfulAsset(filter: {title: {eq: "personal-photo"}}) {
+        nodes {
+          fluid {
+            srcSet
           }
         }
       }
@@ -59,7 +66,7 @@ const RightColumn = () => {
     <Aside>
       <WidgetArea>
         <SidebarTitle title="Here I Am" />
-        <IMG fluid={query.file.childImageSharp.fluid} />
+        <IMG srcSet={query.allContentfulAsset.nodes[0].fluid.srcSet} />
         <Text>
           Hi!   
         </Text>

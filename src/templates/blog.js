@@ -16,7 +16,7 @@ export const query = graphql`
       date(formatString: "dddd, DD MMMM YYYY", locale: "pl")
       title
       content {
-        json
+        raw
       }
     }
   }
@@ -63,7 +63,7 @@ const BlogPost = (props) => {
           <PostDate date={props.data.contentfulBlogPosts.date} />
         </PostHeader>
         <Article>
-           {documentToReactComponents(props.data.contentfulBlogPosts.content.json, options)}
+           {documentToReactComponents(JSON.parse(props.data.contentfulBlogPosts.content.raw), options)}
         </Article>
     </PostsLayout>
   )

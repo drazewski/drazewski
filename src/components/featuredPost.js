@@ -56,10 +56,6 @@ const FeaturedPost = ({ post }) => {
     <PostItem>
       <Thumbnail
         alt={post.node.title}
-        fluid={
-          useContentfulImage(post.node.content.json.content.find(el => el.nodeType === "embedded-asset-block")?.data?.target.sys.contentful_id) ||
-          data.placeholderImage.childImageSharp.fluid
-        }
       />
       <Meta>
         <PostItemTitle>

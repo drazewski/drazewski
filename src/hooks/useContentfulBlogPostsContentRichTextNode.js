@@ -9,7 +9,7 @@ export default contentful_id => {
                     node {
                         id
                         content {
-                            content
+                            raw
                         }
                     }
                 }
@@ -17,7 +17,6 @@ export default contentful_id => {
         }
     `
   );
-  console.error('id:', contentful_id)
 
-  return allContentfulBlogPosts.edges.find(edge => edge.node.id === contentful_id)?.node.content.content;
+  return allContentfulBlogPosts.edges.find(edge => edge.node.id === contentful_id)?.node.content.raw;
 };

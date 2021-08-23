@@ -42,11 +42,30 @@ const AboutPage = () => {
 
       contentfulPages(slug: {eq: "o-mnie"}) {
         pageContent {
-          json
+          raw
         }
       }
     }
   `);
+
+  const document = {
+    nodeType: 'document',
+    data: {},
+    content: [
+      {
+        nodeType: 'paragraph',
+        data: {},
+        content: [
+          {
+            nodeType: 'text',
+            value: 'Hello world!',
+            marks: [],
+            data: {}
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <PagesLayout>
@@ -56,7 +75,7 @@ const AboutPage = () => {
             <IMG fluid={query.file.childImageSharp.fluid} />
           </ImageWrapper>
           <TextWrapper>
-            {documentToReactComponents(query.contentfulPages.pageContent.json)}
+            {documentToReactComponents(JSON.parse(query.contentfulPages.pageContent.raw))}
           </TextWrapper>
         </Flex>
     </PagesLayout>
