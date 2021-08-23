@@ -129,7 +129,7 @@ const BlogPage = (props) => {
               ? post.node.excerpt.excerpt
               : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
             }
-            <ReadMoreLink to={`/blog/${post.node.slug}`}>Przeczytaj całość...</ReadMoreLink>
+            <ReadMoreLink to={`/blog/${post.node.slug}`}>Read more...</ReadMoreLink>
           </Article>
         </ol>
       ))}
