@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-index-js",
+    "path": "/",
+    "result": {"data":{"allContentfulBlogPosts":{"edges":[{"node":{"date":"piątek, 20 sierpnia 2021","slug":"first","title":"First entry","excerpt":{"excerpt":"zajawka"},"content":{"raw":"{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Test\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"}}}]}},"pageContext":{}},
+    "staticQueryHashes": ["1814094319","2236985993","2543130515","268817711","2777447638","2965072909"]}

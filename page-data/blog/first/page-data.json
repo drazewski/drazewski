@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-blog-js",
+    "path": "/blog/first",
+    "result": {"data":{"contentfulBlogPosts":{"date":"piątek, 20 sierpnia 2021","title":"First entry","content":{"raw":"{\"data\":{},\"content\":[{\"data\":{},\"content\":[{\"data\":{},\"marks\":[],\"value\":\"Test\",\"nodeType\":\"text\"}],\"nodeType\":\"paragraph\"}],\"nodeType\":\"document\"}"}}},"pageContext":{"slug":"first"}},
+    "staticQueryHashes": ["2236985993","2543130515","268817711","2777447638"]}
