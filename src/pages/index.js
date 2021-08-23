@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Image from "gatsby-image";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -72,7 +72,7 @@ const PaginationItem = styled.span`
 `;
 
 export const posts = graphql`
-  query posts($limit: Int!, $skip: Int!) {
+  query posts($limit: Int, $skip: Int) {
     allContentfulBlogPosts(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
       edges {
         node {
@@ -125,8 +125,8 @@ const BlogPage = (props) => {
             <PostDate date={post.node.date} />
           </PostHeader>
           <Article>
-            {post.node.excerpt
-              ? documentToReactComponents(JSON.parse(post.node.excerpt?.raw), options)
+            {post.node.excerpt?.excerpt
+              ? post.node.excerpt.excerpt
               : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
             }
             <ReadMoreLink to={`/blog/${post.node.slug}`}>Przeczytaj całość...</ReadMoreLink>
