@@ -29,13 +29,10 @@ const TextWrapper = styled.div`
 const AboutPage = () => {
   const query = useStaticQuery(graphql`
     {
-      file(relativePath: { eq: "personal-photo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-          fixed {
-            ...GatsbyImageSharpFixed
+      allContentfulAsset(filter: {title: {eq: "personal-photo"}}) {
+        nodes {
+          fluid {
+            srcSet
           }
         }
       }
@@ -69,10 +66,10 @@ const AboutPage = () => {
 
   return (
     <PagesLayout>
-        <MainTitle>Mam na imię Ania</MainTitle>
+        <MainTitle>My name is Łukasz</MainTitle>
         <Flex>
           <ImageWrapper>
-            <IMG fluid={query.file.childImageSharp.fluid} />
+            <IMG srcSet={query.allContentfulAsset.nodes[0].fluid.srcSet} />
           </ImageWrapper>
           <TextWrapper>
             {documentToReactComponents(JSON.parse(query.contentfulPages.pageContent.raw))}

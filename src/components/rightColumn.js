@@ -28,17 +28,6 @@ const WidgetArea = styled.div`
 const RightColumn = () => {
   const query = useStaticQuery(graphql`
     {
-      file(relativePath: { eq: "personal-photo.png" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-          fixed {
-            ...GatsbyImageSharpFixed
-          }
-        }
-      }
-
       allContentfulBlogPosts(filter: {featured: {eq: true}}) {
         edges {
           node {
