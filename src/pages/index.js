@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Image from "gatsby-image";
-import { BLOCKS } from "@contentful/rich-text-types";
 import styled from "styled-components"
-import { colors } from '../shared/constants';
+import { colors } from "../shared/constants";
 import Layout from "../layout/layout"
-import { useContentfulImage } from "../hooks";
-import MainTitle from '../components/mainTitle';
-import PostDate from '../components/postDate';
+import MainTitle from "../components/mainTitle";
+import PostDate from "../components/postDate";
 
 const PostHeader = styled.div`
   text-align: center;
@@ -95,17 +93,6 @@ export const posts = graphql`
   }
 `;
 
-// const options = {
-//   renderNode: {
-//     [BLOCKS.EMBEDDED_ASSET]: (node) => {
-//       const alt = node.data.target.fields?.title['en-US'];
-//       const fluid = useContentfulImage(node.data.target.sys.contentful_id);
-
-//       return <IMG alt={alt} fluid={fluid} />
-//     }
-//   }
-// }
-
 const BlogPage = (props) => {
   const [pageArray, setPageArray] = useState([]);
   const { currentPage, numPages } = props.pageContext;
@@ -119,7 +106,7 @@ const BlogPage = (props) => {
 
     setPageArray(pages)
   }, []);
-console.log(props)
+
   return (
     <Layout>
       {props.data.allContentfulBlogPosts.edges.length && props.data.allContentfulBlogPosts.edges.map((post) => (
@@ -146,7 +133,7 @@ console.log(props)
         <Pagination>
           {pageArray.map(element => (
             element !== currentPage ? (
-            <PaginationLink to={element === 1 ? `/` : `/strona/${element}`} key={element}>{element}</PaginationLink>
+            <PaginationLink to={element === 1 ? "/" : `/strona/${element}`} key={element}>{element}</PaginationLink>
             ) : (
             <PaginationItem key={element}>{element}</PaginationItem>
             )

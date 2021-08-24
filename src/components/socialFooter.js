@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 
 const FooterContainer = styled.section`
-  background-color: ${colors.pistachio};
   padding: 10px 0 60px;
   width: 100%;
 `;
