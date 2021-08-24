@@ -7,13 +7,17 @@ import Footer from "../components/footer"
 import Main from "../components/main"
 import RightColumn from "../components/rightColumn"
 import './layout.css';
-import styled from "styled-components"
+import styled from "styled-components";
+import { device } from '../styles/breakpoints';
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 70% 1fr;
   margin: auto;
   max-width: 1030px;
+  @media screen and (max-width: 700px) {
+        display: none;
+    }
 `
 
 const Layout = ({ children }) => (
