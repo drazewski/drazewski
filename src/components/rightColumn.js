@@ -18,7 +18,7 @@ const IMG = styled.img`
 
 const Text = styled.p`
   font-size: 14px;
-  margin: 20px 0;
+  margin: 0 0 20px 0;
 `;
 
 const WidgetArea = styled.div`
@@ -63,6 +63,12 @@ const RightColumn = () => {
       <WidgetArea>
         <SidebarTitle title="Random posts" />
         {query.allContentfulBlogPosts.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
+      </WidgetArea>  
+      <WidgetArea>
+        <SidebarTitle title="Recommended" />
+        <Text>
+        Here you will find interesting articles on various topics that I have read recently.
+        </Text>
       </WidgetArea>
     </Aside>
   )

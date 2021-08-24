@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 import { colors } from '../shared/constants';
+import { sizes } from "../styles/breakpoints"
 
 const HeaderComponent = styled.header`
   background: ${colors.backgroundPrimary};
@@ -25,11 +26,16 @@ const Wrapper = styled.div`
 
 const StyledLink = styled(Link)`
   color: ${colors.textSecondary};
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-decoration: none;
   text-transform: uppercase;
-  padding: 0 25px 4px 0px;
+  padding: 0 5px 4px 0px;
   transition: 0.3s;
+
+  @media(min-width: ${sizes.sm}) {
+    letter-spacing: 2px;
+    padding: 0 25px 4px 0px;
+  }
 
     &[aria-current="page"] {
       color: ${colors.headingsPrimary};
@@ -71,6 +77,11 @@ const MenuItem = styled.li`
 const Social = styled.div`
   color: ${colors.textPrimary};
   font-size: 14px !important;
+  display: none;
+
+  @media(min-width: ${sizes.sm}) {
+    display: block;
+  }
 `;
 
 const Header = ({ siteTitle }) => {
