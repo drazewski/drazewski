@@ -24,10 +24,12 @@
       "plugin:react/recommended"
     ],
     "rules": {
-      "react/prop-types": 0,
+      "react/prop-types": 1,
       "max-len": ["warn", { "code": 120 }],
       "newline-before-return": "warn",
-      "quotes": ["warn", "double"]
+      "quotes": ["warn", "double"], 
+      "no-unused-vars": "warn",
+      "semi": "warn"
     },
     "settings": {
       "react": {

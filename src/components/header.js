@@ -1,13 +1,11 @@
-import React from "react"
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faFacebookF, faInstagram } from "@fortawesome/free-brands-svg-icons"
-import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
-import { colors } from '../shared/constants';
-import { sizes } from "../styles/breakpoints"
+import React from "react";
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { colors } from "../shared/constants";
+import { sizes } from "../shared/breakpoints";
+import { socialIconItems } from "../shared/menuItems";
 
 const HeaderComponent = styled.header`
   background: ${colors.backgroundPrimary};
@@ -84,18 +82,7 @@ const Social = styled.div`
   }
 `;
 
-const Header = ({ siteTitle }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          author
-          title
-        }
-      }
-    }
-  `);
-
+const Header = () => {
   return(
     <HeaderComponent>
       <Wrapper>
@@ -103,43 +90,41 @@ const Header = ({ siteTitle }) => {
           <MenuList>
           <MenuItem>
               <StyledLink to="/">
-                {'Blog'}
+                {"Blog"}
               </StyledLink>
             </MenuItem>
             <MenuItem>
               <StyledLink to="/about">
-                {'About me'}
+                {"About me"}
               </StyledLink>
             </MenuItem>
             <MenuItem>
               <StyledLink to="/contact">
-                {'Contact'}
+                {"Contact"}
               </StyledLink>
             </MenuItem>
           </MenuList>
         </Menu>
         <Social>
-          <StyledOuterLink>
-            <FontAwesomeIcon icon={faFacebookF} />
-          </StyledOuterLink>
-          <StyledOuterLink>
-            <FontAwesomeIcon icon={faInstagram} />
-          </StyledOuterLink>
-          <StyledOuterLink>
-            <FontAwesomeIcon icon={faEnvelope} />
-          </StyledOuterLink>
+          {socialIconItems.map(item => {
+            return(
+              <StyledOuterLink href={item.href} key={item.href}>
+                <FontAwesomeIcon icon={item.icon} />
+              </StyledOuterLink>
+            );
+          })}
         </Social>
       </Wrapper>
     </HeaderComponent>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
-}
+};
 
 Header.defaultProps = {
-  siteTitle: ``,
-}
+  siteTitle: "",
+};
 
-export default Header
+export default Header;

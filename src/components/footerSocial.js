@@ -1,9 +1,16 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
+import React from "react";
+import { socialIconItems } from "../shared/menuItems";
+import { sizes } from "../shared/breakpoints";
 
 const FooterContainer = styled.section`
-  padding: 10px 0 60px;
+  padding: 10px 0;
   width: 100%;
+
+  @media(min-width: ${sizes.sm}) {
+    display: none;
+  }
 `;
 
 const Flex = styled.div`
@@ -22,11 +29,12 @@ const NavList = styled.ul`
 
 const NavListIconItem = styled.li`
   display: inline;
+  font-size: 16px;
   padding: 0 10px;
 
   & a {
     color: black;
-    opacity: 0.3;
+    opacity: 0.5;
     transition: 0.5s all;
 
     &:hover {
@@ -39,14 +47,14 @@ const Icons = styled.div`
   margin: 30px 0;
 `;
 
-const SocialFooter = () => {
+const FooterSocial = () => {
   return (
     <FooterContainer>
-      <Flex className={utilStyles['container']}>
+      <Flex>
         <div>
           <Icons>
             <NavList>
-              {footerIconsItems.map(item => (
+              {socialIconItems.map(item => (
                 <NavListIconItem key={item.href}>
                   <a href={item.href}>
                     <FontAwesomeIcon
@@ -60,7 +68,7 @@ const SocialFooter = () => {
         </div>
       </Flex>
     </FooterContainer>
-  )
-}
+  );
+};
 
-export default SocialFooter; 
+export default FooterSocial; 

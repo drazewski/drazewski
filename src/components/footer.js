@@ -1,9 +1,9 @@
-import React from "react"
-import { Link } from "gatsby"
-import styled from "styled-components"
-import { colors } from '../shared/constants';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCaretSquareUp, faArrowAltCircleUp } from '@fortawesome/free-regular-svg-icons'
+import React from "react";
+import styled from "styled-components";
+import { colors } from "../shared/constants";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleUp } from "@fortawesome/free-regular-svg-icons";
+import FooterSocial from "./footerSocial";
 
 const FooterComponent = styled.footer`
   color: ${colors.textSecondary};
@@ -27,18 +27,19 @@ const Uppercase = styled.span`
   padding-right: 10px;
 `;
 
-const Footer = ({ siteTitle }) => {
+const Footer = () => {
   return(
     <FooterComponent>
+      <FooterSocial />
       <Wrapper>
         <span>All rights reserved © {new Date().getFullYear()}</span>
         <span>
           <Uppercase>Go up</Uppercase>
-          <FontAwesomeIcon icon={faArrowAltCircleUp} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+          <FontAwesomeIcon icon={faArrowAltCircleUp} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} />
         </span>
       </Wrapper>
     </FooterComponent>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

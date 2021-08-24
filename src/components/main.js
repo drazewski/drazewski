@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { sizes } from "../styles/breakpoints";
+import { sizes } from "../shared/breakpoints";
 
 const MainWrapper = styled.main`
   margin: 0 0 50px 0;

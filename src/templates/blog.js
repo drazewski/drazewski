@@ -3,12 +3,12 @@ import { graphql } from "gatsby"
 import Image from "gatsby-image";
 import PostsLayout from "../layout/postsLayout"
 import styled from "styled-components"
-import { colors } from '../shared/constants';
+import { colors } from "../shared/constants";
 import { BLOCKS } from "@contentful/rich-text-types";
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { useContentfulImage } from "../hooks";
-import MainTitle from '../components/mainTitle';
-import PostDate from '../components/postDate';
+import MainTitle from "../components/mainTitle";
+import PostDate from "../components/postDate";
 
 export const query = graphql`
   query($slug: String!) {
@@ -44,8 +44,9 @@ const IMG = styled(Image)`
 
 const options = {
   renderNode: {
+    // eslint-disable-next-line react/display-name
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
-      const alt = node.data.target.fields?.title['en-US'];
+      const alt = node.data.target.fields?.title["en-US"];
       const fluid = useContentfulImage(node.data.target.sys.contentful_id);
 
       return <IMG alt={alt} fluid={fluid} />
