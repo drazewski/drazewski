@@ -3,8 +3,8 @@ import Image from "gatsby-image";
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import PagesLayout from "../layout/pagesLayout"
-import MainTitle from '../components/mainTitle';
+import PagesLayout from "../layout/PagesLayout"
+import MainTitle from '../components/MainTitle';
 
 const Flex = styled.div`
   display: flex;

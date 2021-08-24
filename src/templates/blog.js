@@ -1,14 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image";
-import PostsLayout from "../layout/postsLayout"
+import PostsLayout from "../layout/PostsLayout"
 import styled from "styled-components"
 import { colors } from "../shared/constants";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { useContentfulImage } from "../hooks";
-import MainTitle from "../components/mainTitle";
-import PostDate from "../components/postDate";
+import MainTitle from "../components/MainTitle";
+import PostDate from "../components/PostDate";
 
 export const query = graphql`
   query($slug: String!) {

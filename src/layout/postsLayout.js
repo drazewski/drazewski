@@ -1,10 +1,9 @@
 import React from "react"
 import PropTypes from "prop-types"
-
-import Header from "../components/header"
-import HeaderSection from "../components/headerSection"
-import Footer from "../components/footer"
-import Main from "../components/main"
+import Header from "../components/Header"
+import HeaderSection from "../components/HeaderSection"
+import Footer from "../components/Footer"
+import Main from "../components/Main"
 import './layout.css';
 import styled from "styled-components"
 

@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
-import SidebarTitle from './sidebarTitle'
-import FeaturedPost from './featuredPost'
+import SidebarTitle from './SidebarTitle'
+import FeaturedPost from './FeaturedPost'
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);

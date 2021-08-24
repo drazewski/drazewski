@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors } from "../shared/constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowAltCircleUp } from "@fortawesome/free-regular-svg-icons";
-import FooterSocial from "./footerSocial";
+import FooterSocial from "./FooterSocial";
 
 const FooterComponent = styled.footer`
   color: ${colors.textSecondary};

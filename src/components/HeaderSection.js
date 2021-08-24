@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderImage from "./headerImage";
+import HeaderImage from "./HeaderImage";
 import styled from "styled-components";
 
 const HeaderSectionWrapper = styled.section`

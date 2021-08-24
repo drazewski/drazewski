@@ -4,9 +4,9 @@ import { graphql } from "gatsby"
 import Image from "gatsby-image";
 import styled from "styled-components"
 import { colors } from "../shared/constants";
-import Layout from "../layout/layout"
-import MainTitle from "../components/mainTitle";
-import PostDate from "../components/postDate";
+import Layout from "../layout/Layout"
+import MainTitle from "../components/MainTitle";
+import PostDate from "../components/PostDate";
 
 const PostHeader = styled.div`
   text-align: center;
