@@ -102,7 +102,6 @@ const HeroImage = () => {
     <HeroImageWrapper style={{maxHeight: heroHeight}}>
       <ExportedImage
         image={image}
-        imgStyle={{transform: "scaleX(-1)"}}
         alt="Łukasz Drążewski Personal Blog"
       />
       <ImageShadow />
