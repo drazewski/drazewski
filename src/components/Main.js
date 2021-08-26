@@ -1,18 +1,20 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
+import { sizes } from "../shared/breakpoints";
 
 const MainWrapper = styled.main`
-  min-height: calc(100vh - 100px);
-  margin: 0 15px 50px 0;
+  margin: 0 0 50px 0;
   padding: 15px;
+  @media(min-width: ${sizes.sm}) {
+    margin: 0 15px 50px 0;
+    min-height: calc(100vh - 100px);
+  }
 `;
 
 const Main = ({ children }) => {
-  return(
+  return (
     <MainWrapper>
-        {children}
+      {children}
     </MainWrapper>
   )
 }

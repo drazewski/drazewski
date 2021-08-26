@@ -2,14 +2,11 @@ import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import { graphql } from "gatsby"
 import Image from "gatsby-image";
-import { BLOCKS } from "@contentful/rich-text-types";
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styled from "styled-components"
-import { colors } from '../shared/constants';
-import Layout from "../layout/layout"
-import { useContentfulImage } from "../hooks";
-import MainTitle from '../components/mainTitle';
-import PostDate from '../components/postDate';
+import { colors } from "../shared/constants";
+import Layout from "../layout/Layout"
+import MainTitle from "../components/MainTitle";
+import PostDate from "../components/PostDate";
 
 const PostHeader = styled.div`
   text-align: center;
@@ -77,6 +74,11 @@ export const posts = graphql`
       edges {
         node {
           date(formatString: "MMM DD, YYYY", locale: "en")
+          featuredImage { 
+            fluid(maxWidth: 980) {
+              ...GatsbyContentfulFluid
+            }
+          }
           slug
           title
           excerpt {
@@ -90,17 +92,6 @@ export const posts = graphql`
     }
   }
 `;
-
-const options = {
-  renderNode: {
-    [BLOCKS.EMBEDDED_ASSET]: (node) => {
-      const alt = node.data.target.fields?.title['en-US'];
-      const fluid = useContentfulImage(node.data.target.sys.contentful_id);
-
-      return <IMG alt={alt} fluid={fluid} />
-    }
-  }
-}
 
 const BlogPage = (props) => {
   const [pageArray, setPageArray] = useState([]);
@@ -125,6 +116,11 @@ const BlogPage = (props) => {
             <PostDate date={post.node.date} />
           </PostHeader>
           <Article>
+          <IMG 
+            fluid={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid} 
+            key={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid.src}
+            alt={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.title}
+          />
             {post.node.excerpt?.excerpt
               ? post.node.excerpt.excerpt
               : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
@@ -137,7 +133,7 @@ const BlogPage = (props) => {
         <Pagination>
           {pageArray.map(element => (
             element !== currentPage ? (
-            <PaginationLink to={element === 1 ? `/` : `/strona/${element}`} key={element}>{element}</PaginationLink>
+            <PaginationLink to={element === 1 ? "/" : `/strona/${element}`} key={element}>{element}</PaginationLink>
             ) : (
             <PaginationItem key={element}>{element}</PaginationItem>
             )

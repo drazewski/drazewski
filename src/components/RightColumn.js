@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
-import SidebarTitle from './sidebarTitle'
-import FeaturedPost from './featuredPost'
+import React from "react";
+import styled from "styled-components";
+import { useStaticQuery, graphql } from "gatsby";
+import SidebarTitle from "./SidebarTitle";
+import FeaturedPost from "./FeaturedPost";
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);
@@ -13,17 +13,19 @@ const Aside = styled.aside`
 `;
 
 const IMG = styled.img`
-  max-width: 100%;
+  max-width: 70%;
+  margin: auto;
+  display: flex;
 `;
 
 const Text = styled.p`
   font-size: 14px;
-  margin: 20px 0;
+  margin: 0 0 20px 0;
 `;
 
 const WidgetArea = styled.div`
   padding-bottom: 30px;
-`
+`;
 
 const RightColumn = () => {
   const query = useStaticQuery(graphql`
@@ -63,9 +65,15 @@ const RightColumn = () => {
       <WidgetArea>
         <SidebarTitle title="Random posts" />
         {query.allContentfulBlogPosts.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
+      </WidgetArea>  
+      <WidgetArea>
+        <SidebarTitle title="Recommended" />
+        <Text>
+        Here you will find interesting articles on various topics that I have read recently.
+        </Text>
       </WidgetArea>
     </Aside>
-  )
-}
+  );
+};
 
-export default RightColumn
+export default RightColumn;
