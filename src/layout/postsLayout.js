@@ -14,18 +14,30 @@ const Grid = styled.div`
   max-width: 1030px;
 `;
 
-const PostsLayout = ({ postTitle, children }) => (
-  <>
-    <Header/>
-    <HeroImage />
-    <Grid>
-      <Main>
-        {children}
-      </Main>
-    </Grid>
-    <Footer />
-  </>
-);
+const Image = styled.img`
+  max-height: calc(66vh - 48px);
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+`
+
+const PostsLayout = ({ postTitle, imageData, children }) => {
+
+  return(
+    <>
+      <Header/>
+      <Image
+        srcSet={imageData.fluid.srcSet}
+      />
+      <Grid>
+        <Main>
+          {children}
+        </Main>
+      </Grid>
+      <Footer />
+    </>
+  );
+};
 
 PostsLayout.propTypes = {
   children: PropTypes.node.isRequired,

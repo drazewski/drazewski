@@ -19,6 +19,7 @@ module.exports = {
     "gatsby-plugin-styled-components",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-eslint",
+    "gatsby-plugin-image",
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
@@ -70,13 +71,13 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "gatsby-starter-default",
-        short_name: "starter",
+        name: "lukasz-drazewski-personak-blog",
+        short_name: "ld-blog",
         start_url: "/",
         background_color: "#663399",
         theme_color: "#663399",
         display: "minimal-ui",
-        icon: "src/images/gatsby-icon.png", // This path is relative to the root of the site.
+        icon: "src/images/blog-icon.png", // This path is relative to the root of the site.
       },
     },
     {

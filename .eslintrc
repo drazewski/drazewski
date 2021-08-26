@@ -24,7 +24,7 @@
       "plugin:react/recommended"
     ],
     "rules": {
-      "react/prop-types": 1,
+      "react/prop-types": 0,
       "max-len": ["warn", { "code": 120 }],
       "newline-before-return": "warn",
       "quotes": ["warn", "double"], 

@@ -39,6 +39,11 @@ const RightColumn = () => {
             content {
               raw
             }
+            featuredImage {
+              fixed(width: 300) {
+                src
+              }
+            }
           }
         }
       }

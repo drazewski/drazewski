@@ -103,7 +103,7 @@ const HeroImage = () => {
       <ExportedImage
         image={image}
         imgStyle={{transform: "scaleX(-1)"}}
-        style={{transition: "0.5 all"}}
+        alt="Łukasz Drążewski Personal Blog"
       />
       <ImageShadow />
       <TitleWrapper>

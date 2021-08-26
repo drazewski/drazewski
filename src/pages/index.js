@@ -116,11 +116,13 @@ const BlogPage = (props) => {
             <PostDate date={post.node.date} />
           </PostHeader>
           <Article>
-          <IMG 
-            fluid={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid} 
-            key={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid.src}
-            alt={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.title}
-          />
+            <Link to={`/blog/${post.node.slug}`}>
+              <IMG 
+                fluid={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid} 
+                key={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid.src}
+                alt={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.title}
+              />
+            </Link>
             {post.node.excerpt?.excerpt
               ? post.node.excerpt.excerpt
               : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>

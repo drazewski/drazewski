@@ -1,11 +1,11 @@
-import React from "react"
-import { graphql } from "gatsby"
+import React from "react";
+import { graphql } from "gatsby";
 import Image from "gatsby-image";
-import PostsLayout from "../layout/PostsLayout"
-import styled from "styled-components"
+import PostsLayout from "../layout/PostsLayout";
+import styled from "styled-components";
 import { colors } from "../shared/constants";
 import { BLOCKS } from "@contentful/rich-text-types";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { useContentfulImage } from "../hooks";
 import MainTitle from "../components/MainTitle";
 import PostDate from "../components/PostDate";
@@ -18,9 +18,14 @@ export const query = graphql`
       content {
         raw
       }
+      featuredImage { 
+        fluid {
+          srcSet
+        }
+      }
     }
   }
-`
+`;
 
 const PostHeader = styled.div`
   text-align: center;
@@ -49,25 +54,26 @@ const options = {
       const alt = node.data.target.fields?.title["en-US"];
       const fluid = useContentfulImage(node.data.target.sys.contentful_id);
 
-      return <IMG alt={alt} fluid={fluid} />
+      return <IMG alt={alt} fluid={fluid} />;
     }
   }
-}
+};
 
 const BlogPost = (props) => {
   return (
     <PostsLayout
       postTitle={props.data.contentfulBlogPosts.title}
+      imageData={props.data.contentfulBlogPosts.featuredImage}
     >
-        <PostHeader>
-          <MainTitle>{props.data.contentfulBlogPosts.title}</MainTitle>
-          <PostDate date={props.data.contentfulBlogPosts.date} />
-        </PostHeader>
-        <Article>
-           {documentToReactComponents(JSON.parse(props.data.contentfulBlogPosts.content.raw), options)}
-        </Article>
+      <PostHeader>
+        <MainTitle>{props.data.contentfulBlogPosts.title}</MainTitle>
+        <PostDate date={props.data.contentfulBlogPosts.date} />
+      </PostHeader>
+      <Article>
+        {documentToReactComponents(JSON.parse(props.data.contentfulBlogPosts.content.raw), options)}
+      </Article>
     </PostsLayout>
-  )
-}
+  );
+};
 
-export default BlogPost
+export default BlogPost;

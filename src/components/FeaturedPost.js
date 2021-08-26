@@ -1,14 +1,12 @@
-import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image";
-import styled from "styled-components"
-import { useContentfulImage } from "../hooks";
-import { colors } from '../shared/constants';
+import React from "react";
+import { Link, useStaticQuery, graphql } from "gatsby";
+import styled from "styled-components";
+import { colors } from "../shared/constants";
 
 const PostItem = styled.div`
   display: flex;
   margin-bottom: 20px;
-`
+`;
 
 const PostItemTitle = styled.h4`
   color: ${colors.headingsPrimary};
@@ -17,7 +15,7 @@ const PostItemTitle = styled.h4`
   line-height: 1.5;
   margin: 0;
   padding-bottom: 7px;
-`
+`;
 
 const PostItemDate = styled.span`
   color: ${colors.textLight};
@@ -25,19 +23,18 @@ const PostItemDate = styled.span`
   font-size: 11px;
   font-family: 'Open sans';
   font-style: italic;
-`
+`;
 
-const Thumbnail = styled(Image)`
+const Thumbnail = styled.img`
   flex: 2;
   margin: 10px 10px 10px 0;
-  width: 150px;
-  height: 100px;
-`
+  width: 80px;
+`;
 
 const Meta = styled.div`
   flex: 3;
-  margin: 10px 0 10px 10px;
-`
+  margin: 5px 0 10px 10px;
+`;
 
 const FeaturedPost = ({ post }) => {
   const data = useStaticQuery(graphql`
@@ -56,6 +53,7 @@ const FeaturedPost = ({ post }) => {
     <PostItem>
       <Thumbnail
         alt={post.node.title}
+        src={post.node.featuredImage.fixed.src}
       />
       <Meta>
         <PostItemTitle>
@@ -65,6 +63,6 @@ const FeaturedPost = ({ post }) => {
       </Meta>
     </PostItem>
   );
-}
+};
 
-export default FeaturedPost
+export default FeaturedPost;
