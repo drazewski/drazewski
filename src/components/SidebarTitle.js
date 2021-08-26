@@ -1,11 +1,10 @@
-import React from "react"
-import styled from "styled-components"
-import { colors } from '../shared/constants';
+import React from "react";
+import styled from "styled-components";
 
 const BorderedWrapper = styled.div`
   padding-top: 30px;
   border-top: 1px solid #ddd;
-`
+`;
 
 const Title = styled.h2`
   font-size: 16px;
@@ -32,6 +31,6 @@ const SidebarTitle = ({ title }) => (
       <TitleText>{title}</TitleText>
     </Title>
   </BorderedWrapper>
-)
+);
 
-export default SidebarTitle
+export default SidebarTitle;

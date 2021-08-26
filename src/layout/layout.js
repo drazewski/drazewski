@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Header from "../components/Header";
-import HeaderSection from "../components/HeaderSection";
+import HeroImage from "../components/HeroImage";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
 import RightColumn from "../components/RightColumn";
@@ -23,7 +23,7 @@ const Grid = styled.div`
 const Layout = ({ children }) => (
   <>
     <Header />
-    <HeaderSection />
+    <HeroImage />
     <Grid>
       <Main>
         {children}

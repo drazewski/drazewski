@@ -1,48 +1,48 @@
-require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV || 'production'}`,
-})
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV || "production"}`,
+});
 
 module.exports = {
   siteMetadata: {
-    title: 'Personal Blog',
-    description: '',
-    author: 'Lukasz Drazewski',
+    title: "Personal Blog",
+    description: "",
+    author: "Lukasz Drazewski",
   },
   plugins: [
     {
-      resolve: 'gatsby-source-contentful',
+      resolve: "gatsby-source-contentful",
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    'gatsby-plugin-styled-components',
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-eslint',
+    "gatsby-plugin-styled-components",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-eslint",
     {
-      resolve: 'gatsby-plugin-web-font-loader',
+      resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ['Lora', 'Open Sans', 'Raleway']
+          families: ["Lora", "Open Sans", "Charmonman"]
         }
       }
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'images',
+        name: "images",
         path: `${__dirname}/src/images`,
       },
     },
-    'gatsby-transformer-sharp',
+    "gatsby-transformer-sharp",
     {
-      resolve: 'gatsby-plugin-sharp',
+      resolve: "gatsby-plugin-sharp",
       options: {
         failOnError: false
       }
     },
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: "gatsby-transformer-remark",
       options: {
         // CommonMark mode (default: true)
         commonmark: true,
@@ -55,10 +55,10 @@ module.exports = {
         // Plugins configs
         plugins: [
           {
-            resolve: 'gatsby-remark-relative-images',
+            resolve: "gatsby-remark-relative-images",
           },
           {
-            resolve: 'gatsby-remark-images',
+            resolve: "gatsby-remark-images",
             options: {
               maxWidth: 750,
               linkImagesToOriginal: false,
@@ -68,21 +68,21 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: "gatsby-plugin-manifest",
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
-        start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
-        display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
+        name: "gatsby-starter-default",
+        short_name: "starter",
+        start_url: "/",
+        background_color: "#663399",
+        theme_color: "#663399",
+        display: "minimal-ui",
+        icon: "src/images/gatsby-icon.png", // This path is relative to the root of the site.
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'src',
+        name: "src",
         path: `${__dirname}/src/`,
       },
     },
@@ -90,4 +90,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};

@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
-import SidebarTitle from './SidebarTitle'
-import FeaturedPost from './FeaturedPost'
+import React from "react";
+import styled from "styled-components";
+import { useStaticQuery, graphql } from "gatsby";
+import SidebarTitle from "./SidebarTitle";
+import FeaturedPost from "./FeaturedPost";
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);
@@ -13,7 +13,9 @@ const Aside = styled.aside`
 `;
 
 const IMG = styled.img`
-  max-width: 100%;
+  max-width: 70%;
+  margin: auto;
+  display: flex;
 `;
 
 const Text = styled.p`
@@ -23,7 +25,7 @@ const Text = styled.p`
 
 const WidgetArea = styled.div`
   padding-bottom: 30px;
-`
+`;
 
 const RightColumn = () => {
   const query = useStaticQuery(graphql`
@@ -71,7 +73,7 @@ const RightColumn = () => {
         </Text>
       </WidgetArea>
     </Aside>
-  )
-}
+  );
+};
 
-export default RightColumn
+export default RightColumn;
