@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import { sizes } from "../shared/breakpoints";
 
 const ExportedImage = styled(GatsbyImage)`
   margin: auto;
+  position: unset !important;
 `;
 
 const HeroImageWrapper = styled.section`
@@ -68,6 +69,8 @@ const Subname = styled.h5`
 `;
 
 const HeroImage = () => {
+  const [heroHeight, setHeroHeight] = useState("calc(100vh - 48px)");
+
   const data = useStaticQuery(graphql`
     query {
       placeholderImage: file(relativePath: { eq: "grapes.jpg" }) {
@@ -83,14 +86,24 @@ const HeroImage = () => {
     }
   `);
 
+  useEffect(() => {
+    const isNextTimeVisited = localStorage.getItem("nextTimeVisited");
+
+    if (isNextTimeVisited) {
+      setHeroHeight("50vh");
+    } else {
+     localStorage.setItem("nextTimeVisited", 1);
+    }
+  },[]);
+
   const image = getImage(data.placeholderImage);
 
   return (
-    <HeroImageWrapper>
+    <HeroImageWrapper style={{maxHeight: heroHeight}}>
       <ExportedImage
         image={image}
         imgStyle={{transform: "scaleX(-1)"}}
-        style={{maxHeight: "calc(100vh - 48px)"}}
+        style={{transition: "0.5 all"}}
       />
       <ImageShadow />
       <TitleWrapper>
