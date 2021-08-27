@@ -23,13 +23,14 @@ const ContactPage = () => {
         pageContent {
           raw
         }
+        pageTitle
       }
     }
   `);
 
   return (
     <PagesLayout>
-        <MainTitle>Kontakt ze mną</MainTitle>
+        <MainTitle>{query.contentfulPages.pageTitle}</MainTitle>
         <Flex>
           <TextWrapper>
             {documentToReactComponents(JSON.parse(query.contentfulPages.pageContent.raw))}

@@ -1,18 +1,18 @@
-import React from "react"
-import Image from "gatsby-image";
-import styled from "styled-components"
-import { useStaticQuery, graphql } from "gatsby"
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import PagesLayout from "../layout/PagesLayout"
-import MainTitle from '../components/MainTitle';
+import React from "react";
+import styled from "styled-components";
+import { useStaticQuery, graphql } from "gatsby";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import PagesLayout from "../layout/PagesLayout";
+import MainTitle from "../components/MainTitle";
 
 const Flex = styled.div`
   display: flex;
-`
+`;
 
-const IMG = styled(Image)`
+const IMG = styled.img`
+  max-width: 70%;
   margin: auto;
-  max-width: 250px;
+  display: flex;
 `;
 
 const ImageWrapper = styled.div`
@@ -24,7 +24,7 @@ const TextWrapper = styled.div`
   flex: 3;
   padding: 40px 20px;
   text-align: center;
-`
+`;
 
 const AboutPage = () => {
   const query = useStaticQuery(graphql`
@@ -41,32 +41,14 @@ const AboutPage = () => {
         pageContent {
           raw
         }
+        pageTitle
       }
     }
   `);
 
-  const document = {
-    nodeType: 'document',
-    data: {},
-    content: [
-      {
-        nodeType: 'paragraph',
-        data: {},
-        content: [
-          {
-            nodeType: 'text',
-            value: 'Hello world!',
-            marks: [],
-            data: {}
-          },
-        ],
-      },
-    ],
-  };
-
   return (
     <PagesLayout>
-        <MainTitle>My name is Łukasz</MainTitle>
+        <MainTitle>{query.contentfulPages.pageTitle}</MainTitle>
         <Flex>
           <ImageWrapper>
             <IMG srcSet={query.allContentfulAsset.nodes[0].fluid.srcSet} />
@@ -77,6 +59,6 @@ const AboutPage = () => {
         </Flex>
     </PagesLayout>
   );
-}
+};
 
-export default AboutPage
+export default AboutPage;

@@ -1,15 +1,15 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import Main from "../components/Main"
-import './layout.css';
-import styled from "styled-components"
+import React from "react";
+import PropTypes from "prop-types";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Main from "../components/Main";
+import "./layout.css";
+import styled from "styled-components";
 
 const Grid = styled.div`
-  margin: auto;
+  margin: 20px auto 0;
   max-width: 1030px;
-`
+`;
 
 const PagesLayout = ({ children }) => (
   <>
@@ -21,10 +21,10 @@ const PagesLayout = ({ children }) => (
     </Grid>
     <Footer />
   </>
-)
+);
 
 PagesLayout.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default PagesLayout
+export default PagesLayout;
