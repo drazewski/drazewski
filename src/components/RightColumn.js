@@ -16,6 +16,7 @@ const IMG = styled.img`
   max-width: 70%;
   margin: auto;
   display: flex;
+  padding-bottom: 20px;
 `;
 
 const Text = styled.p`
@@ -48,6 +49,27 @@ const RightColumn = () => {
         }
       }
 
+      allContentfulExternalLinks(sort: {order: DESC, fields: date}, limit: 5) {
+        edges {
+          node {
+            author
+            title
+            url
+            featuredImage {
+              fixed(width: 300) {
+                src
+              }
+            }
+          }
+        }
+      }
+
+      contentfulElements(title: {eq: "about-me"}) {
+        content {
+          content
+        }
+      }
+
       allContentfulAsset(filter: {title: {eq: "personal-photo"}}) {
         nodes {
           fluid {
@@ -58,24 +80,41 @@ const RightColumn = () => {
     }
   `);
 
-  return(
+  return (
     <Aside>
       <WidgetArea>
         <SidebarTitle title="Here I Am" />
         <IMG srcSet={query.allContentfulAsset.nodes[0].fluid.srcSet} />
         <Text>
-          Hi!   
+          {query.contentfulElements.content.content}
         </Text>
       </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Random posts" />
-        {query.allContentfulBlogPosts.edges.map((post) => <FeaturedPost key={post.node.slug} post={post} />)}
-      </WidgetArea>  
+        {query.allContentfulBlogPosts.edges.map((post) => (
+          <FeaturedPost
+            key={post.node.slug}
+            title={post.node.title}
+            imageUrl={post.node.featuredImage.fixed.src}
+            link={`/blog/${post.node.slug}`}
+            subtitle={post.node.date}
+          />
+        ))}
+      </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Recommended" />
         <Text>
-        Here you will find interesting articles on various topics that I have read recently.
+          Here you will find interesting articles on various topics that I have read recently.
         </Text>
+        {query.allContentfulExternalLinks.edges.map((post) => (
+          <FeaturedPost
+            key={post.node.title}
+            title={post.node.title}
+            imageUrl={post.node.featuredImage.fixed.src}
+            link={post.node.url}
+            subtitle={post.node.author}
+          />
+        ))}
       </WidgetArea>
     </Aside>
   );

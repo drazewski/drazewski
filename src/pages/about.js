@@ -4,9 +4,15 @@ import { useStaticQuery, graphql } from "gatsby";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import PagesLayout from "../layout/PagesLayout";
 import MainTitle from "../components/MainTitle";
+import { sizes } from "../shared/breakpoints";
 
 const Flex = styled.div`
   display: flex;
+  flex-flow: column-reverse;
+  
+  @media(min-width: ${sizes.sm}) {
+    flex-flow: row;
+  }
 `;
 
 const IMG = styled.img`

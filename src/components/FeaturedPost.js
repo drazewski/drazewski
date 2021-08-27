@@ -1,34 +1,54 @@
 import React from "react";
-import { Link, useStaticQuery, graphql } from "gatsby";
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { colors } from "../shared/constants";
+import { sizes } from "../shared/breakpoints";
 
 const PostItem = styled.div`
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const PostItemTitle = styled.h4`
   color: ${colors.headingsPrimary};
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
-  padding-bottom: 7px;
+  margin-bottom: 6px;
+
+  @media(min-width: ${sizes.sm}) {
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  @media(min-width: ${sizes.md}) {
+    -webkit-line-clamp: 3;
+  }
 `;
 
-const PostItemDate = styled.span`
+const PostItemSubtitle = styled.span`
   color: ${colors.textLight};
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 13px;
   font-family: 'Open sans';
   font-style: italic;
+
+  @media(min-width: ${sizes.sm}) {
+    font-size: 11px;
+  }
 `;
 
 const Thumbnail = styled.img`
   flex: 2;
-  margin: 10px 10px 10px 0;
-  width: 80px;
+  margin: 10px 0px;
+  width: 60px;
+  min-height: 60px;
+  max-width: 140px;
 `;
 
 const Meta = styled.div`
@@ -36,33 +56,28 @@ const Meta = styled.div`
   margin: 5px 0 10px 10px;
 `;
 
-const FeaturedPost = ({ post }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      placeholderImage: file(relativePath: { eq: "boat.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `);
-
+const FeaturedPost = ({ title, imageUrl, link, subtitle }) => {
   return (
     <PostItem>
       <Thumbnail
-        alt={post.node.title}
-        src={post.node.featuredImage.fixed.src}
+        alt={title}
+        src={imageUrl}
       />
       <Meta>
         <PostItemTitle>
-          <Link to={`/blog/${post.node.slug}`}>{post.node.title}</Link>
+          <Link to={link}>{title}</Link>
         </PostItemTitle>
-        <PostItemDate>{post.node.date}</PostItemDate>
+        <PostItemSubtitle>{subtitle}</PostItemSubtitle>
       </Meta>
     </PostItem>
   );
+};
+
+FeaturedPost.propTypes = {
+  title: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
 };
 
 export default FeaturedPost;
