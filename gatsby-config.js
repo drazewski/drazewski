@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: "Personal Blog",
+    title: "Lukasz Drazewski - Personal Blog",
     description: "",
     author: "Lukasz Drazewski",
   },
@@ -71,7 +71,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "lukasz-drazewski-personak-blog",
+        name: "Łukasz Drązewski Personal Blog",
         short_name: "ld-blog",
         start_url: "/",
         background_color: "#663399",

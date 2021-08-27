@@ -8,6 +8,7 @@ import RightColumn from "../components/RightColumn";
 import "./layout.css";
 import styled from "styled-components";
 import { sizes } from "../shared/breakpoints";
+import SEO from "../components/Seo";
 
 const Grid = styled.div`
   display: grid;
@@ -22,6 +23,7 @@ const Grid = styled.div`
 
 const Layout = ({ children }) => (
   <>
+    <SEO />
     <Header />
     <HeroImage />
     <Grid>

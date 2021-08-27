@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Main from "../components/Main";
 import "./layout.css";
 import styled from "styled-components";
+import SEO from "../components/Seo";
 
 const Grid = styled.div`
   margin: 20px auto 0;
@@ -13,6 +14,7 @@ const Grid = styled.div`
 
 const PagesLayout = ({ children }) => (
   <>
+    <SEO />
     <Header/>
     <Grid>
       <Main>

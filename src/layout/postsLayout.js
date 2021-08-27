@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Main from "../components/Main";
 import "./layout.css";
 import styled from "styled-components";
+import SEO from "../components/Seo";
 
 const Grid = styled.div`
   display: grid;
@@ -21,10 +22,11 @@ const Image = styled.img`
   object-position: center;
 `
 
-const PostsLayout = ({ postTitle, imageData, children }) => {
+const PostsLayout = ({ imageData, children }) => {
 
   return(
     <>
+      <SEO />
       <Header/>
       <Image
         srcSet={imageData.fluid.srcSet}
