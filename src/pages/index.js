@@ -25,12 +25,13 @@ const StyledLink = styled(Link)`
 
 const ReadMoreLink = styled(Link)`
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: uppercase;
   text-align: center;
   text-decoration: underline;
   color: inherit;
   transition: 0.3s;
+  margin-top: 10px;
 
     &:hover {
       opacity: 0.5;
@@ -112,7 +113,7 @@ const BlogPage = (props) => {
       {props.data.allContentfulBlogPosts.edges.length && props.data.allContentfulBlogPosts.edges.map((post) => (
         <ol key={post.node.slug}>
           <PostHeader>
-            <MainTitle><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></MainTitle>
+            <MainTitle isHome><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></MainTitle>
             <PostDate date={post.node.date} />
           </PostHeader>
           <Article>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -6,6 +6,7 @@ import Main from "../components/Main";
 import "./layout.css";
 import styled from "styled-components";
 import SEO from "../components/Seo";
+import HeroImageTitle from "../components/HeroImageTitle";
 
 const Grid = styled.div`
   display: grid;
@@ -21,15 +22,28 @@ const Image = styled.img`
   object-position: center;
 `;
 
+const AnimationWrapper = styled.div`
+  opacity: ${props => props.isVisible ? 1 : 0};
+  transition: opacity 0.6s;
+`;
+
 const PostsLayout = ({ imageData, children }) => {
+  const [heroImageTitleVisible, setHeroImageTitleVisible] = useState(false);
+
+  useEffect(() => setTimeout(() => setHeroImageTitleVisible(true), 2000), []);
 
   return(
     <>
       <SEO />
       <Header/>
-      <Image
-        srcSet={imageData.fluid.srcSet}
-      />
+      <div style={{position: "relative"}}>
+        <Image
+          srcSet={imageData.fluid.srcSet}
+        />
+        <AnimationWrapper isVisible={heroImageTitleVisible}>
+          <HeroImageTitle />
+        </AnimationWrapper>
+      </div>
       <Grid>
         <Main>
           {children}

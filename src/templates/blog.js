@@ -35,6 +35,22 @@ const PostHeader = styled.div`
 const Article = styled.article`
   color: ${colors.textPrimary};
   text-align: justify;
+
+  a {
+    font-weight: 600;
+  }
+
+  b {
+    color: #000;
+  }
+
+  br {
+    margin: 40px 0 35px;
+    border: solid;
+    border-width: 1px;
+    border-bottom: 0;
+    border-color: #aaa;
+  }
 `;
 
 const IMG = styled(Image)`
@@ -51,10 +67,9 @@ const options = {
   renderNode: {
     // eslint-disable-next-line react/display-name
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
-      const alt = node.data.target.fields?.title["en-US"];
-      const fluid = useContentfulImage(node.data.target.sys.contentful_id);
+      const fluid = useContentfulImage(node.data.target.sys.id);
 
-      return <IMG alt={alt} fluid={fluid} />;
+      return <IMG fluid={fluid} />;
     }
   }
 };
