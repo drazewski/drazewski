@@ -27,14 +27,20 @@ const AnimationWrapper = styled.div`
   transition: opacity 0.6s;
 `;
 
-const PostsLayout = ({ imageData, children }) => {
+const PostsLayout = ({ imageData, children, postTitle }) => {
   const [heroImageTitleVisible, setHeroImageTitleVisible] = useState(false);
 
-  useEffect(() => setTimeout(() => setHeroImageTitleVisible(true), 2000), []);
+  useEffect(() => {
+    const timer = setTimeout(() => setHeroImageTitleVisible(true), 2000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   return(
     <>
-      <SEO />
+      <SEO title={postTitle} />
       <Header/>
       <div style={{position: "relative"}}>
         <Image

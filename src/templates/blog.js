@@ -44,7 +44,11 @@ const Article = styled.article`
     color: #000;
   }
 
-  br {
+  h1,h2,h3,h4,h5,h6 {
+    text-align: left;
+  }
+
+  hr {
     margin: 40px 0 35px;
     border: solid;
     border-width: 1px;
