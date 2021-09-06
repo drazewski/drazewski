@@ -20,17 +20,22 @@ const Title = styled.div`
 `;
 
 const Name = styled.h1`
-  font-family: 'Charmonman', cursive;
   font-size: 20px;
-  border-bottom: 1px solid;
-  margin-bottom: 15px;
+  margin-bottom: 1px;
   padding-bottom: 12px;
   font-weight: 300;
+  text-shadow: 1px 1px #999999b3;
 
   @media(min-width: ${sizes.sm}) {
-    font-size: 30px;
+    font-size: 24px;
   }
 `;
+
+const Border = styled.div`
+  height: 2px;
+  background: linear-gradient(77deg,#c805f1,#84b3f9ed, #cbe0ff00);
+`;
+
 
 const Subname = styled.h5`
   font-size: 12px;
@@ -40,8 +45,7 @@ const Subname = styled.h5`
   margin: 10px 0;
 
   @media(min-width: ${sizes.sm}) {
-    font-size: 16px;
-    margin: 20px 0;
+    margin: 15px 0;
   }
 `;
 
@@ -49,7 +53,8 @@ const HeroImageTitle = () => {
   return (
     <HeroImageTitleWrapper>
       <Title>
-        <Name>Łukasz Drążewski</Name>
+        <Name>Lukasz Drazewski</Name>
+        <Border />
         <Subname>personal blog</Subname>
       </Title> 
     </HeroImageTitleWrapper>

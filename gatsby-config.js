@@ -24,7 +24,7 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Lora", "Open Sans", "Charmonman"]
+          families: ["Lora", "Open Sans"]
         }
       }
     },
