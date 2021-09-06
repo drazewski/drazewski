@@ -14,23 +14,15 @@ const HeroImageWrapper = styled.section`
   overflow: hidden;
   padding: 0;
   position: relative;
-`;
-
-const ImageShadow = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  box-shadow: 16px -20px 40px 0px #777 inset;
-  top: 0;
-  left: 0;  
+  min-height: 50vh;
 `;
 
 const HeroImage = () => {
-  const [heroHeight, setHeroHeight] = useState("calc(100vh - 48px)");
+  const [heroHeight, setHeroHeight] = useState("calc(100vh)");
 
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "grapes.jpg" }) {
+      placeholderImage: file(relativePath: { eq: "sea.png" }) {
         childImageSharp {
           gatsbyImageData(
             width: 1600
@@ -47,7 +39,7 @@ const HeroImage = () => {
     const isNextTimeVisited = localStorage.getItem("nextTimeVisited");
 
     if (isNextTimeVisited) {
-      setHeroHeight("50vh");
+      setHeroHeight("69vh");
     } else {
      localStorage.setItem("nextTimeVisited", 1);
     }
@@ -61,7 +53,6 @@ const HeroImage = () => {
         image={image}
         alt="Łukasz Drążewski Personal Blog"
       />
-      <ImageShadow />
       <HeroImageTitle />
     </HeroImageWrapper>
   );

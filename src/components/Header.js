@@ -8,8 +8,13 @@ import { sizes } from "../shared/breakpoints";
 import { socialIconItems } from "../shared/menuItems";
 
 const HeaderComponent = styled.header`
-  background: ${colors.backgroundPrimary};
+  width: 100%;
+  background: #fff;
   height: 48px;
+  box-shadow: 0 1px 9px rgb(0 0 0 / 32%);
+  z-index: 10;
+  position: fixed;
+  top: 0;
 `;
 
 const Wrapper = styled.div`

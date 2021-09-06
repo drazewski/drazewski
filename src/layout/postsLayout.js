@@ -16,7 +16,8 @@ const Grid = styled.div`
 `;
 
 const Image = styled.img`
-  max-height: calc(66vh - 48px);
+  max-height: 69vh;
+  min-height: 50vh;
   width: 100%;
   object-fit: cover;
   object-position: center;

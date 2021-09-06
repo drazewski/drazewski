@@ -6,7 +6,7 @@ const HeroImageTitleWrapper = styled.div`
   max-width: 1030px;
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: 5%;
   left: 50%;
   right: 50%;
   transform: translateX(-50%);
@@ -20,14 +20,13 @@ const Title = styled.div`
 `;
 
 const Name = styled.h1`
-  font-size: 20px;
+  font-size: 22px;
   margin-bottom: 1px;
   padding-bottom: 12px;
   font-weight: 300;
-  text-shadow: 1px 1px #999999b3;
 
   @media(min-width: ${sizes.sm}) {
-    font-size: 24px;
+    font-size: 30px;
   }
 `;
 
