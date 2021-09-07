@@ -4,9 +4,11 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
 import "./layout.css";
+import Parallax from "../shared/parallax";
 import styled from "styled-components";
 import SEO from "../components/Seo";
 import HeroImageTitle from "../components/HeroImageTitle";
+
 
 const Grid = styled.div`
   display: grid;
@@ -21,6 +23,16 @@ const Image = styled.img`
   width: 100%;
   object-fit: cover;
   object-position: center;
+  transition: object-position 0.1s ease-out;
+`;
+
+const ImageShadow = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(0deg,#2222226b,rgb(203 224 255 / 0%));
+  bottom: 2px;
+  left: 0;  
 `;
 
 const AnimationWrapper = styled.div`
@@ -34,6 +46,10 @@ const PostsLayout = ({ imageData, children, postTitle }) => {
   useEffect(() => {
     const timer = setTimeout(() => setHeroImageTitleVisible(true), 2000);
 
+    const parallax = new Parallax();
+
+    parallax.setVars();
+
     return () => {
       clearTimeout(timer);
     };
@@ -43,19 +59,20 @@ const PostsLayout = ({ imageData, children, postTitle }) => {
     <>
       <SEO title={postTitle} />
       <Header/>
-      <div style={{position: "relative"}}>
-        <Image
-          srcSet={imageData.fluid.srcSet}
-        />
-        <AnimationWrapper isVisible={heroImageTitleVisible}>
-          <HeroImageTitle />
-        </AnimationWrapper>
-      </div>
-      <Grid>
-        <Main>
-          {children}
-        </Main>
-      </Grid>
+        <div style={{position: "relative"}} className="parallax">
+          <Image
+            srcSet={imageData.fluid.srcSet}
+          />
+          <ImageShadow />
+          <AnimationWrapper isVisible={heroImageTitleVisible}>
+            <HeroImageTitle />
+          </AnimationWrapper>
+        </div>
+        <Grid>
+          <Main>
+            {children}
+          </Main>
+        </Grid>
       <Footer />
     </>
   );

@@ -49,11 +49,11 @@ const Article = styled.article`
   }
 
   hr {
-    margin: 40px 0 35px;
-    border: solid;
-    border-width: 1px;
-    border-bottom: 0;
-    border-color: #aaa;
+    margin: 40px auto 35px;
+    border: 0;
+    background: linear-gradient(77deg, rgb(200, 5, 241), rgba(132, 179, 249, 0.93), rgba(203, 224, 255, 0));
+    height: 2px;
+    width: 55%;
   }
 `;
 

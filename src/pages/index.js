@@ -7,6 +7,7 @@ import { colors } from "../shared/constants";
 import Layout from "../layout/Layout"
 import MainTitle from "../components/MainTitle";
 import PostDate from "../components/PostDate";
+import Parallax from "../shared/parallax";
 
 const PostHeader = styled.div`
   text-align: center;
@@ -105,7 +106,11 @@ const BlogPage = (props) => {
       pages.push(i);
     }
 
-    setPageArray(pages)
+    setPageArray(pages);
+
+    const parallax = new Parallax();
+
+    parallax.setVars();
   }, []);
 
   return (

@@ -25,7 +25,9 @@ const Layout = ({ children }) => (
   <>
     <SEO />
     <Header />
-    <HeroImage />
+    <div className="parallax">
+      <HeroImage />
+    </div>
     <Grid>
       <Main>
         {children}
