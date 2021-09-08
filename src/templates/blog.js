@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from "react";
 import { graphql } from "gatsby";
 import Image from "gatsby-image";
@@ -6,6 +7,7 @@ import styled from "styled-components";
 import { colors } from "../shared/constants";
 import { BLOCKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { renderRichText } from "gatsby-source-contentful/rich-text";
 import { useContentfulImage } from "../hooks";
 import MainTitle from "../components/MainTitle";
 import PostDate from "../components/PostDate";
@@ -17,6 +19,22 @@ export const query = graphql`
       title
       content {
         raw
+        references {
+        ... on ContentfulAsset {
+          contentful_id
+          __typename
+          id
+        }
+        ... on ContentfulCodeBlock {
+            contentful_id
+            __typename
+            description
+            language
+            code {
+              code
+            }
+          }
+        }
       }
       featuredImage { 
         fluid {
@@ -55,6 +73,14 @@ const Article = styled.article`
     height: 2px;
     width: 55%;
   }
+
+  pre.javascript {
+    padding: 4px 10px;
+    border: 1px solid #aaa;
+    background: #fbf5ef;
+    font-size: 14px;
+    line-height: 1.25em;
+  }
 `;
 
 const IMG = styled(Image)`
@@ -70,15 +96,32 @@ const IMG = styled(Image)`
 const options = {
   renderNode: {
     // eslint-disable-next-line react/display-name
-    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+    [BLOCKS.EMBEDDED_ASSET]: node => {
       const fluid = useContentfulImage(node.data.target.sys.id);
 
       return <IMG fluid={fluid} />;
-    }
+    },
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+      console.log(node)
+      const { __typename } = node.data.target;
+      switch (__typename) {
+        case "ContentfulCodeBlock":
+          return (
+            <pre className={`prettyprint lang-js ${node.data.target.language}`}>
+              <code>{node.data.target.code.code}</code>
+            </pre>
+          );
+        default:
+          return null;
+      }
+    },
+
   }
 };
 
 const BlogPost = (props) => {
+  const { content } = props.data.contentfulBlogPosts;
+
   return (
     <PostsLayout
       postTitle={props.data.contentfulBlogPosts.title}
@@ -89,7 +132,7 @@ const BlogPost = (props) => {
         <PostDate date={props.data.contentfulBlogPosts.date} />
       </PostHeader>
       <Article>
-        {documentToReactComponents(JSON.parse(props.data.contentfulBlogPosts.content.raw), options)}
+        {renderRichText(content, options)}
       </Article>
     </PostsLayout>
   );

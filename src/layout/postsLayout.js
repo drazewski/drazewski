@@ -45,7 +45,6 @@ const PostsLayout = ({ imageData, children, postTitle }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => setHeroImageTitleVisible(true), 2000);
-
     const parallax = new Parallax();
 
     parallax.setVars();
