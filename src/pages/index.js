@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "gatsby"
-import { graphql } from "gatsby"
+import React, { useEffect, useState } from "react";
+import { Link } from "gatsby";
+import { graphql } from "gatsby";
 import Image from "gatsby-image";
-import styled from "styled-components"
+import styled from "styled-components";
 import { colors } from "../shared/constants";
-import Layout from "../layout/Layout"
+import Layout from "../layout/Layout";
 import MainTitle from "../components/MainTitle";
 import PostDate from "../components/PostDate";
 import Parallax from "../shared/parallax";
@@ -12,7 +12,7 @@ import Parallax from "../shared/parallax";
 const PostHeader = styled.div`
   text-align: center;
   margin-bottom: 30px;
-`
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -25,17 +25,26 @@ const StyledLink = styled(Link)`
 `;
 
 const ReadMoreLink = styled(Link)`
-  display: block;
+  display: inline-block;
   font-size: 14px;
   text-transform: uppercase;
   text-align: center;
-  text-decoration: underline;
   color: inherit;
   transition: 0.3s;
-  margin-top: 10px;
+  margin: 10px auto;
+  position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(77deg,#c805f1,#84b3f9ed, #cbe0ff00);
+    }
 
     &:hover {
-      opacity: 0.5;
+      opacity: 0.75;
     }
 `;
 
@@ -49,7 +58,7 @@ const Article = styled.article`
   & .gatsby-resp-image-wrapper {
     margin: 30px 0;
   }
-`
+`;
 
 const IMG = styled(Image)`
   margin: 30px 0;
@@ -124,16 +133,18 @@ const BlogPage = (props) => {
           <Article>
             <Link to={`/blog/${post.node.slug}`}>
               <IMG 
-                fluid={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid} 
-                key={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.fluid.src}
-                alt={props.data.allContentfulBlogPosts.edges[0].node.featuredImage.title}
+                fluid={post.node.featuredImage.fluid} 
+                key={post.node.featuredImage.fluid.src}
+                alt={post.node.featuredImage.title}
               />
             </Link>
             {post.node.excerpt?.excerpt
               ? post.node.excerpt.excerpt
               : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
             }
-            <ReadMoreLink to={`/blog/${post.node.slug}`}>Read more...</ReadMoreLink>
+            <div style={{textAlign: "center"}}>
+              <ReadMoreLink to={`/blog/${post.node.slug}`}>Read more...</ReadMoreLink>
+            </div>
           </Article>
         </ol>
       ))}
@@ -150,6 +161,6 @@ const BlogPage = (props) => {
       }
     </Layout>
   );
-}
+};
 
-export default BlogPage
+export default BlogPage;
