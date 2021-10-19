@@ -5,13 +5,20 @@ import Image from "gatsby-image";
 import styled from "styled-components";
 import { colors } from "../shared/constants";
 import Layout from "../layout/Layout";
-import MainTitle from "../components/MainTitle";
 import PostDate from "../components/PostDate";
 import Parallax from "../shared/parallax";
+import { sizes } from "../shared/breakpoints";
 
 const PostHeader = styled.div`
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+`;
+
+const PostTitle = styled.h2`
+  font-size: 26px;
+  margin: 0;
+  color: #000;
+  line-height: 1.25;
 `;
 
 const StyledLink = styled(Link)`
@@ -25,13 +32,14 @@ const StyledLink = styled(Link)`
 `;
 
 const ReadMoreLink = styled(Link)`
-  display: inline-block;
+  display: block;
+  width: max-content;
   font-size: 14px;
   text-transform: uppercase;
   text-align: center;
   color: inherit;
   transition: 0.3s;
-  margin: 10px auto;
+  margin: 0px auto 10px;
   position: relative;
 
     &:after {
@@ -46,6 +54,15 @@ const ReadMoreLink = styled(Link)`
     &:hover {
       opacity: 0.75;
     }
+
+  @media(min-width: ${sizes.sm}) {
+    transform: translateY(-10px);
+  }
+`;
+
+const ArticleListItem = styled.li`
+  display: flex;
+  flex-direction: row;
 `;
 
 const Article = styled.article`
@@ -60,9 +77,35 @@ const Article = styled.article`
   }
 `;
 
+const Flex = styled.div`
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+
+  @media(min-width: ${sizes.sm}) {
+    flex-direction: row;
+  }
+
+`;
+
 const IMG = styled(Image)`
-  margin: 30px 0;
+  margin: -10px 0 10px;
   max-width: 100%;
+
+  @media(min-width: ${sizes.sm}) {
+    margin: 5px 0 30px 20px;
+    width: 200px;
+  }
+`;
+
+const Excerpt = styled.div`
+& p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
 `;
 
 const Pagination = styled.div`
@@ -126,26 +169,30 @@ const BlogPage = (props) => {
     <Layout>
       {props.data.allContentfulBlogPosts.edges.length && props.data.allContentfulBlogPosts.edges.map((post) => (
         <ol key={post.node.slug}>
-          <PostHeader>
-            <MainTitle isHome><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></MainTitle>
-            <PostDate date={post.node.date} />
-          </PostHeader>
-          <Article>
-            <Link to={`/blog/${post.node.slug}`}>
-              <IMG 
-                fluid={post.node.featuredImage.fluid} 
-                key={post.node.featuredImage.fluid.src}
-                alt={post.node.featuredImage.title}
-              />
-            </Link>
-            {post.node.excerpt?.excerpt
-              ? post.node.excerpt.excerpt
-              : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
-            }
-            <div style={{textAlign: "center"}}>
+          <ArticleListItem>
+            <Article>
+              <PostHeader>
+                <PostTitle isHome><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></PostTitle>
+                <PostDate date={post.node.date} />
+              </PostHeader>
+              <Flex>
+                <Excerpt>
+                {post.node.excerpt?.excerpt
+                  ? <p>{post.node.excerpt.excerpt}</p>
+                  : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
+                }
+                </Excerpt>
+                <Link to={`/blog/${post.node.slug}`}>
+                  <IMG 
+                    fluid={post.node.featuredImage.fluid} 
+                    key={post.node.featuredImage.fluid.src}
+                    alt={post.node.featuredImage.title}
+                  />
+                </Link>
+              </Flex>
               <ReadMoreLink to={`/blog/${post.node.slug}`}>Read more...</ReadMoreLink>
-            </div>
-          </Article>
+            </Article>
+          </ArticleListItem>
         </ol>
       ))}
       {numPages > 1 &&

@@ -33,6 +33,7 @@ const TextWrapper = styled.div`
 `;
 
 const AboutPage = () => {
+
   const query = useStaticQuery(graphql`
     {
       allContentfulAsset(filter: {title: {eq: "personal-photo"}}) {

@@ -76,6 +76,15 @@ const Article = styled.article`
     text-align: left;
   }
 
+  h2:not(:first-of-type) {
+    padding-top: 40px
+  }
+
+  p code {
+    background-color: #ededed;
+    padding: 0 4px;
+  }
+
   hr {
     margin: 40px auto 35px;
     border: 0;

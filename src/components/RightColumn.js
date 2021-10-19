@@ -3,13 +3,18 @@ import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
 import SidebarTitle from "./SidebarTitle";
 import FeaturedPost from "./FeaturedPost";
+import { sizes } from "../shared/breakpoints";
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);
   max-width: 1030px;
-  margin: 0 auto;
-  padding: 30px 0;
+  margin: 30px auto;
   width: calc(100% - 60px);
+
+  @media(min-width: ${sizes.sm}) {
+    border-left: 1px solid #ddd;
+    padding-left : 30px;
+  }
 `;
 
 const IMG = styled.img`
@@ -102,19 +107,10 @@ const RightColumn = () => {
         ))}
       </WidgetArea>
       <WidgetArea>
-        <SidebarTitle title="Recommended" />
-        <Text>
-          Here you will find interesting articles on various topics that I have read recently.
-        </Text>
-        {query.allContentfulExternalLinks.edges.map((post) => (
-          <FeaturedPost
-            key={post.node.title}
-            title={post.node.title}
-            imageUrl={post.node.featuredImage.fixed.src}
-            link={post.node.url}
-            subtitle={post.node.author}
-          />
-        ))}
+        <SidebarTitle title="My Instagram" />
+          <div className="taggbox-container" style={{width:"100%", height:"2000px", overflow: "auto"}}>
+            <div className="taggbox-socialwall" data-wall-id="73302" view-url="https://widget.taggbox.com/73302"></div>
+          </div>
       </WidgetArea>
     </Aside>
   );

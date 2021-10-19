@@ -83,6 +83,7 @@ function SEO({ description, lang, meta, title }) {
         `}
       </script>
       <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+      <script src="https://widget.taggbox.com/embed.min.js" type="text/javascript"></script>
     </Helmet>
   );
 }

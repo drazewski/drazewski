@@ -4,9 +4,9 @@ import { sizes } from "../shared/breakpoints";
 
 const MainWrapper = styled.main`
   margin: 0 0 50px 0;
-  padding: 30px 15px 15px;
+  padding: 0px 30px 15px 15px;
   @media(min-width: ${sizes.sm}) {
-    margin: 0 15px 50px 0;
+    margin: 30px 0 50px 0;
     min-height: calc(100vh - 100px);
   }
 `;
