@@ -3,6 +3,8 @@ import { Link } from "gatsby";
 import { graphql } from "gatsby";
 import Image from "gatsby-image";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStream } from "@fortawesome/free-solid-svg-icons";
 import { colors } from "../shared/constants";
 import Layout from "../layout/Layout";
 import PostDate from "../components/PostDate";
@@ -15,10 +17,21 @@ const PostHeader = styled.div`
 `;
 
 const PostTitle = styled.h2`
-  font-size: 26px;
+  font-size: 30px;
   margin: 0;
   color: #000;
   line-height: 1.25;
+`;
+
+const Tag = styled.span`
+  color: #84b3f9;
+  font-size: 14px;
+  font-family: 'Open sans';
+  padding: 2px 16px 4px;
+  border-radius: 20px;
+  margin-left: 10px;
+  border: 1px solid #84b3f9ed;
+  transition: 0.4s all;
 `;
 
 const StyledLink = styled(Link)`
@@ -29,35 +42,6 @@ const StyledLink = styled(Link)`
     &:hover {
       opacity: 0.5;
     }
-`;
-
-const ReadMoreLink = styled(Link)`
-  display: block;
-  width: max-content;
-  font-size: 14px;
-  text-transform: uppercase;
-  text-align: center;
-  color: inherit;
-  transition: 0.3s;
-  margin: 0px auto 10px;
-  position: relative;
-
-    &:after {
-      content: '';
-      position: absolute;
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(77deg,#c805f1,#84b3f9ed, #cbe0ff00);
-    }
-
-    &:hover {
-      opacity: 0.75;
-    }
-
-  @media(min-width: ${sizes.sm}) {
-    transform: translateY(-10px);
-  }
 `;
 
 const ArticleListItem = styled.li`
@@ -71,6 +55,10 @@ const Article = styled.article`
   margin-bottom: 60px;
   text-align: justify;
   line-height: 1.75;
+  border: 1px solid #444;
+  padding: 10px 20px 10px;
+  border-radius: 8px;
+  box-shadow: 6px 6px 1px #ccc;
 
   & .gatsby-resp-image-wrapper {
     margin: 30px 0;
@@ -91,21 +79,45 @@ const Flex = styled.div`
 const IMG = styled(Image)`
   margin: -10px 0 10px;
   max-width: 100%;
+  border-radius: 5px;
+  transition: 0.4s all;
 
   @media(min-width: ${sizes.sm}) {
-    margin: 5px 0 30px 20px;
+    margin: 5px 0 10px 20px;
     width: 200px;
+  }
+
+  &:hover {
+    opacity: 0.7
   }
 `;
 
 const Excerpt = styled.div`
-& p {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-}
+  padding-top: 4px;
+  & p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+`;
+
+const ArticleFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledIconLink = styled(Link)`
+  color: ${colors.textSecondary};
+  padding-right: 10px;
+  font-size: 22px;
+  transition: 0.3s;
+  cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
 `;
 
 const Pagination = styled.div`
@@ -141,6 +153,7 @@ export const posts = graphql`
           content {
             raw
           }
+          tagi
         }
       }
     }
@@ -174,12 +187,17 @@ const BlogPage = (props) => {
               <PostHeader>
                 <PostTitle isHome><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></PostTitle>
                 <PostDate date={post.node.date} />
+                {/* {post.node?.tagi?.length > 0 && <span>·</span>} */}
               </PostHeader>
               <Flex>
                 <Excerpt>
                 {post.node.excerpt?.excerpt
                   ? <p>{post.node.excerpt.excerpt}</p>
-                  : <p>{post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value}</p>
+                  : <p>
+                    {
+                      post.node.content.raw.content.find((node) => node.nodeType === "paragraph").content[0].value
+                    }
+                  </p>
                 }
                 </Excerpt>
                 <Link to={`/blog/${post.node.slug}`}>
@@ -190,7 +208,16 @@ const BlogPage = (props) => {
                   />
                 </Link>
               </Flex>
-              <ReadMoreLink to={`/blog/${post.node.slug}`}>Read more...</ReadMoreLink>
+              <ArticleFooter>
+                <span>
+                  {post.node?.tagi?.length > 0 && post.node.tagi.map(tag => (
+                    <Tag key={tag}>{tag}</Tag>
+                  ))}
+                </span>
+                <StyledIconLink to={`/blog/${post.node.slug}`}>
+                  <FontAwesomeIcon icon={faStream} />
+                </StyledIconLink>
+              </ArticleFooter>
             </Article>
           </ArticleListItem>
         </ol>

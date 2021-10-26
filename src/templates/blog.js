@@ -80,6 +80,10 @@ const Article = styled.article`
     padding-top: 40px
   }
 
+  p {
+    font-size: 18px;
+  }
+
   p code {
     background-color: #ededed;
     padding: 0 4px;

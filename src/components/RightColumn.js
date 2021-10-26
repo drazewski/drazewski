@@ -3,30 +3,29 @@ import styled from "styled-components";
 import { useStaticQuery, graphql } from "gatsby";
 import SidebarTitle from "./SidebarTitle";
 import FeaturedPost from "./FeaturedPost";
-import { sizes } from "../shared/breakpoints";
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);
   max-width: 1030px;
-  margin: 30px auto;
+  margin: 0 auto;
+  padding: 30px 0;
   width: calc(100% - 60px);
-
-  @media(min-width: ${sizes.sm}) {
-    border-left: 1px solid #ddd;
-    padding-left : 30px;
-  }
 `;
 
 const IMG = styled.img`
-  max-width: 70%;
-  margin: auto;
+  margin: 0px auto 10px;
   display: flex;
-  padding-bottom: 20px;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  object-position: right;
 `;
 
 const Text = styled.p`
   font-size: 14px;
   margin: 0 0 20px 0;
+  text-align: justify;
 `;
 
 const WidgetArea = styled.div`
@@ -54,7 +53,7 @@ const RightColumn = () => {
         }
       }
 
-      allContentfulExternalLinks(sort: {order: DESC, fields: date}, limit: 5) {
+      allContentfulExternalLinks(sort: {order: DESC, fields: date}, limit: 100) {
         edges {
           node {
             author
@@ -107,10 +106,19 @@ const RightColumn = () => {
         ))}
       </WidgetArea>
       <WidgetArea>
-        <SidebarTitle title="My Instagram" />
-          <div className="taggbox-container" style={{width:"100%", height:"2000px", overflow: "auto"}}>
-            <div className="taggbox-socialwall" data-wall-id="73302" view-url="https://widget.taggbox.com/73302"></div>
-          </div>
+        <SidebarTitle title="Recommended" />
+        <Text>
+          A list of articles that I find particularly interesting or practical.
+        </Text>
+        {query.allContentfulExternalLinks.edges.map((post) => (
+          <FeaturedPost
+            key={post.node.title}
+            title={post.node.title}
+            imageUrl={post.node.featuredImage.fixed.src}
+            link={post.node.url}
+            subtitle={post.node.author}
+          />
+        ))}
       </WidgetArea>
     </Aside>
   );
