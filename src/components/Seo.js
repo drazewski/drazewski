@@ -32,7 +32,7 @@ function SEO({ description, lang, meta, title }) {
       htmlAttributes={{
         lang,
       }}
-      title={site.siteMetadata.title}
+      title={site.siteMetadata.title || "Drazewski Blog"}
       meta={[
         {
           name: "description",
@@ -83,6 +83,7 @@ function SEO({ description, lang, meta, title }) {
         `}
       </script>
       <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+      {/* <script id="dsq-count-scr" src="//https-drazewski-github-io.disqus.com/count.js" async></script> */}
     </Helmet>
   );
 }
@@ -91,13 +92,14 @@ SEO.defaultProps = {
   lang: "en",
   meta: [],
   description: "",
+  title: "Drazewski Blog"
 };
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
 export default SEO;

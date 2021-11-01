@@ -3,8 +3,6 @@ import { Link } from "gatsby";
 import { graphql } from "gatsby";
 import Image from "gatsby-image";
 import styled from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStream } from "@fortawesome/free-solid-svg-icons";
 import { colors } from "../shared/constants";
 import Layout from "../layout/Layout";
 import PostDate from "../components/PostDate";
@@ -29,7 +27,7 @@ const Tag = styled.span`
   font-family: 'Open sans';
   padding: 2px 16px 4px;
   border-radius: 20px;
-  margin-left: 10px;
+  margin-right: 10px;
   border: 1px solid #84b3f9ed;
   transition: 0.4s all;
 `;
@@ -108,18 +106,6 @@ const ArticleFooter = styled.div`
   justify-content: space-between;
 `;
 
-const StyledIconLink = styled(Link)`
-  color: ${colors.textSecondary};
-  padding-right: 10px;
-  font-size: 22px;
-  transition: 0.3s;
-  cursor: pointer;
-
-    &:hover {
-      opacity: 0.5;
-    }
-`;
-
 const Pagination = styled.div`
   display: flex;
   justify-content: center;
@@ -187,7 +173,6 @@ const BlogPage = (props) => {
               <PostHeader>
                 <PostTitle isHome><StyledLink to={`/blog/${post.node.slug}`}>{post.node.title}</StyledLink></PostTitle>
                 <PostDate date={post.node.date} />
-                {/* {post.node?.tagi?.length > 0 && <span>·</span>} */}
               </PostHeader>
               <Flex>
                 <Excerpt>
@@ -214,9 +199,10 @@ const BlogPage = (props) => {
                     <Tag key={tag}>{tag}</Tag>
                   ))}
                 </span>
-                <StyledIconLink to={`/blog/${post.node.slug}`}>
-                  <FontAwesomeIcon icon={faStream} />
-                </StyledIconLink>
+                <span data-disqus-identifier={post.node.slug} />
+                <Link to={`/blog/${post.node.slug}#disqus_thread`}>
+                  {/* <span data-disqus-identifier={post.node.slug} /> */}
+                </Link>
               </ArticleFooter>
             </Article>
           </ArticleListItem>

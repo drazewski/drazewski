@@ -1,45 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { GatsbyImage } from "gatsby-plugin-image";
 import Header from "../components/Header";
+import HeroImage from "../components/HeroImage";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
+import RightColumn from "../components/RightColumn";
 import "./layout.css";
 import styled from "styled-components";
+import { sizes } from "../shared/breakpoints";
 import SEO from "../components/Seo";
 
-const Div = styled(GatsbyImage)`
-  z-index: -1;
-  width: 100%;
-  position: absolute;
-  height: 100%;
-  min-height: calc(100vh + 32px);
-`;
-
 const Grid = styled.div`
-  margin: 48px auto 0;
-  padding-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: auto;
   max-width: 1030px;
-  min-height: calc(100vh - 48px);
+
+  @media(min-width: ${sizes.sm}) {
+    grid-template-columns: 70% 1fr;
+  }
 `;
 
-const PagesLayout = ({ bgImage, children }) => (
+const Layout = ({ children }) => (
   <>
     <SEO />
-    <Header/>
-    <Div image={bgImage} />
+    <Header />
+    <div className="parallax">
+      <HeroImage />
+    </div>
     <Grid>
       <Main>
         {children}
       </Main>
+      <RightColumn />
     </Grid>
     <Footer />
   </>
 );
 
-PagesLayout.propTypes = {
+Layout.propTypes = {
   children: PropTypes.node.isRequired,
-  bgImage: PropTypes.string,
 };
 
-export default PagesLayout;
+export default Layout;

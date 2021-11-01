@@ -16,6 +16,12 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
+    {
+      resolve: "gatsby-plugin-disqus",
+      options: {
+        shortname: "https-drazewski-github-io"
+      }
+    },
     "gatsby-plugin-styled-components",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-eslint",

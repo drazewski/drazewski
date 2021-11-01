@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Disqus } from 'gatsby-plugin-disqus';
 import PropTypes from "prop-types";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -35,12 +36,16 @@ const ImageShadow = styled.div`
   left: 0;  
 `;
 
+const DisqusWrapper = styled.div`
+  padding: 0 30px 0 15px;
+`;
+
 const AnimationWrapper = styled.div`
   opacity: ${props => props.isVisible ? 1 : 0};
   transition: opacity 0.6s;
 `;
 
-const PostsLayout = ({ imageData, children, postTitle }) => {
+const PostsLayout = ({ imageData, children, postTitle, slug }) => {
   const [heroImageTitleVisible, setHeroImageTitleVisible] = useState(false);
 
   useEffect(() => {
@@ -71,6 +76,17 @@ const PostsLayout = ({ imageData, children, postTitle }) => {
           <Main>
             {children}
           </Main>
+          <DisqusWrapper>
+            <Disqus
+              config={{
+                url: process.env.PROD 
+                  ? `https://drazewski.github.io/blog/${slug}` 
+                  : `http://localhost:8000/blog/${slug}`,
+                identifier: slug,
+                title: postTitle,
+              }}
+            />
+          </DisqusWrapper>
         </Grid>
       <Footer />
     </>

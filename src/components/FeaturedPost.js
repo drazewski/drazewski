@@ -65,7 +65,7 @@ const FeaturedPost = ({ title, imageUrl, link, subtitle }) => {
       />
       <Meta>
         <PostItemTitle>
-          <Link to={link}>{title}</Link>
+          <a href={link}>{title}</a>
         </PostItemTitle>
         <PostItemSubtitle>{subtitle}</PostItemSubtitle>
       </Meta>

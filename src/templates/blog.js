@@ -89,6 +89,27 @@ const Article = styled.article`
     padding: 0 4px;
   }
 
+  ol {
+    list-style: decimal;
+    padding-left: 20px;
+    margin-bottom: 30px;
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 20px;
+    margin-bottom: 30px;
+  }
+
+  li p {
+    margin-bottom: 0;
+  }
+
+  blockquote {
+    border-left: 6px solid rgb(231, 235, 238);
+    padding-left: 16px;
+  }
+
   hr {
     margin: 40px auto 35px;
     border: 0;
@@ -123,6 +144,16 @@ const IMG = styled(Image)`
 
   & img {
     object-fit: contain !important;
+    margin: auto;
+    max-width: 100%;
+
+    @media(min-width: ${sizes.sm}) {
+      max-width: 75%;
+    }
+
+    @media(min-width: ${sizes.md}) {
+      max-width: 50%;
+    }
   }
 `;
 
@@ -175,6 +206,7 @@ const BlogPost = (props) => {
     <PostsLayout
       postTitle={props.data.contentfulBlogPosts.title}
       imageData={props.data.contentfulBlogPosts.featuredImage}
+      slug={props.data.contentfulBlogPosts.slug}
     >
       <PostHeader>
         <MainTitle>{props.data.contentfulBlogPosts.title}</MainTitle>
