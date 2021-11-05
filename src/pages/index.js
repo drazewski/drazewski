@@ -54,7 +54,7 @@ const Article = styled.article`
   text-align: justify;
   line-height: 1.75;
   border: 1px solid #444;
-  padding: 10px 20px 10px;
+  padding: 20px;
   border-radius: 8px;
   box-shadow: 6px 6px 1px #ccc;
 

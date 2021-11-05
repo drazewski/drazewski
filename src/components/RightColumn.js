@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useStaticQuery, graphql } from "gatsby";
+import { useStaticQuery, graphql, Link } from "gatsby";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SidebarTitle from "./SidebarTitle";
 import FeaturedPost from "./FeaturedPost";
 
@@ -28,8 +30,25 @@ const Text = styled.p`
   text-align: justify;
 `;
 
+const MoreLink = styled.span`
+& a {
+  color: #555;
+}
+`;
+
 const WidgetArea = styled.div`
   padding-bottom: 30px;
+`;
+
+const Flex = styled.li`
+  align-items: baseline;
+  display: flex;
+
+  & svg {
+    color: #84b3f9;
+    transform: translateY(3px);
+    width: 1em;
+  }
 `;
 
 const RightColumn = () => {
@@ -91,19 +110,24 @@ const RightColumn = () => {
         <IMG srcSet={query.allContentfulAsset.nodes[0].fluid.srcSet} />
         <Text>
           {query.contentfulElements.content.content}
+          {" "}
+          <MoreLink>{"More about me "}<Link to="/about">read  here...</Link></MoreLink>
         </Text>
       </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Random posts" />
+        <ul>
         {query.allContentfulBlogPosts.edges.map((post) => (
-          <FeaturedPost
-            key={post.node.slug}
-            title={post.node.title}
-            imageUrl={post.node.featuredImage.fixed.src}
-            link={`/blog/${post.node.slug}`}
-            subtitle={post.node.date}
-          />
+          <Flex key={post.node.slug}>
+            <FontAwesomeIcon icon={faChevronRight} />
+            <FeaturedPost
+              title={post.node.title}
+              link={`/blog/${post.node.slug}`}
+              subtitle={post.node.date}
+            />
+          </Flex>
         ))}
+        </ul>
       </WidgetArea>
       <WidgetArea>
         <SidebarTitle title="Recommended" />

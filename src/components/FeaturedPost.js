@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "gatsby";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { colors } from "../shared/constants";
@@ -16,7 +15,7 @@ const PostItemTitle = styled.h4`
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
-  margin-bottom: 6px;
+  margin-bottom: ${props => props.isImage ? "6px" : "0"};
 
   @media(min-width: ${sizes.sm}) {
     font-size: 14px;
@@ -48,7 +47,7 @@ const Thumbnail = styled.img`
   margin: 10px 0px;
   width: 60px;
   min-height: 60px;
-  max-width: 140px;
+  max-width: 72px;
 `;
 
 const Meta = styled.div`
@@ -59,12 +58,14 @@ const Meta = styled.div`
 const FeaturedPost = ({ title, imageUrl, link, subtitle }) => {
   return (
     <PostItem>
-      <Thumbnail
-        alt={title}
-        src={imageUrl}
-      />
+      {imageUrl &&
+        <Thumbnail
+          alt={title}
+          src={imageUrl}
+        />
+      }
       <Meta>
-        <PostItemTitle>
+        <PostItemTitle isImage={!!imageUrl}>
           <a href={link}>{title}</a>
         </PostItemTitle>
         <PostItemSubtitle>{subtitle}</PostItemSubtitle>

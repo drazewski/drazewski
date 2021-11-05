@@ -11,7 +11,7 @@ import SEO from "../components/Seo";
 const Div = styled(GatsbyImage)`
   z-index: -1;
   width: 100%;
-  position: absolute;
+  position: absolute !important;
   height: 100%;
   min-height: calc(100vh + 32px);
 `;
@@ -27,7 +27,7 @@ const PagesLayout = ({ bgImage, children }) => (
   <>
     <SEO />
     <Header/>
-    <Div image={bgImage} />
+    {bgImage && <Div image={bgImage} />}
     <Grid>
       <Main>
         {children}
