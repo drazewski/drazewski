@@ -22,7 +22,7 @@ const PostTitle = styled.h2`
 `;
 
 const Tag = styled.span`
-  color: #84b3f9;
+  color: ${colors.lightBlue};
   font-size: 14px;
   font-family: 'Open sans';
   padding: 2px 16px 4px;

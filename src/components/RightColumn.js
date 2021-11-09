@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useStaticQuery, graphql, Link } from "gatsby";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SidebarTitle from "./SidebarTitle";
 import FeaturedPost from "./FeaturedPost";
+import { getAllMyAnswers } from "../services/stackService";
+import StackItem from "./StackItem";
+import { colors } from "../shared/constants";
+
+const LIMIT_ANSWERS = 8;
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);
@@ -45,7 +50,7 @@ const Flex = styled.li`
   display: flex;
 
   & svg {
-    color: #84b3f9;
+    color: ${colors.lightBlue};
     transform: translateY(3px);
     width: 1em;
   }
@@ -103,6 +108,18 @@ const RightColumn = () => {
     }
   `);
 
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    let mounted = false;
+
+    getAllMyAnswers(LIMIT_ANSWERS).then(data => {
+      if (!mounted) setAnswers(data);
+    });
+
+    return () => mounted = true;
+  }, []);
+
   return (
     <Aside>
       <WidgetArea>
@@ -129,21 +146,21 @@ const RightColumn = () => {
         ))}
         </ul>
       </WidgetArea>
+      {answers?.items?.length > 0 && (
       <WidgetArea>
-        <SidebarTitle title="Recommended" />
-        <Text>
-          A list of articles that I find particularly interesting or practical.
-        </Text>
-        {query.allContentfulExternalLinks.edges.map((post) => (
-          <FeaturedPost
-            key={post.node.title}
-            title={post.node.title}
-            imageUrl={post.node.featuredImage.fixed.src}
-            link={post.node.url}
-            subtitle={post.node.author}
+        <SidebarTitle title="My Stack Activity" />
+        {[...answers.items].sort((a,b) => b.creation_date - a.creation_date).map((item) => (
+          <StackItem
+            key={item.answer_id}
+            score={item.score}
+            isAccepted={item.is_accepted}
+            id={item.question_id}
+            link={item.link}
+            title={item.title}
           />
         ))}
       </WidgetArea>
+      )}
     </Aside>
   );
 };

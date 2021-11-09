@@ -4,4 +4,7 @@ export const colors = {
     textSecondary: "#444",
     textLight: "#999",
     headingsPrimary: "#222", 
-}
+    lightBlue: "#84b3f9",
+    darkBlue: "#0074CC",
+    purple: "#c805f1",
+};
