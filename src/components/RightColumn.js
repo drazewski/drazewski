@@ -9,7 +9,7 @@ import { getAllMyAnswers } from "../services/stackService";
 import StackItem from "./StackItem";
 import { colors } from "../shared/constants";
 
-const LIMIT_ANSWERS = 8;
+const LIMIT_ANSWERS = 12;
 
 const Aside = styled.aside`
   min-height: calc(100vh - 210px);
@@ -149,14 +149,14 @@ const RightColumn = () => {
       {answers?.items?.length > 0 && (
       <WidgetArea>
         <SidebarTitle title="My Stack Activity" />
-        {[...answers.items].sort((a,b) => b.creation_date - a.creation_date).map((item) => (
+        {[...answers.items].sort((a,b) => b.score - a.score).slice(0,7).map((item) => (
           <StackItem
             key={item.answer_id}
             score={item.score}
             isAccepted={item.is_accepted}
             id={item.question_id}
-            link={item.link}
             title={item.title}
+            link={item.link}
           />
         ))}
       </WidgetArea>
