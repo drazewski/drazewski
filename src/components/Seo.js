@@ -78,7 +78,7 @@ function SEO({ description, lang, meta, title }) {
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
 
-          gtag('config', 'G-8K87PLRDQE');
+          gtag('config', 'G-YL4EL5CN67');
     }
         `}
       </script>
