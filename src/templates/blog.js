@@ -138,8 +138,8 @@ const Article = styled.article`
 `;
 
 const IMG = styled(Image)`
-  margin: 30px 0;
-  max-width: 100%;
+  margin: 30px auto;
+  max-width: 600px;
   max-height: 75vh;
 
   & img {

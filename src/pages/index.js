@@ -8,6 +8,8 @@ import Layout from "../layout/Layout";
 import PostDate from "../components/PostDate";
 import Parallax from "../shared/parallax";
 import { sizes } from "../shared/breakpoints";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 const PostHeader = styled.div`
   text-align: center;
@@ -120,6 +122,16 @@ const PaginationItem = styled.span`
   padding: 0 8px;
 `;
 
+const PaginationText = styled(Link)`
+  font: 13px Lora;
+  padding: 0 5px;
+`;
+
+const PaginationArrow = styled(FontAwesomeIcon)`
+  font-size: 12px;
+  padding-top: 2px;
+`;
+
 export const posts = graphql`
   query posts($limit: Int, $skip: Int) {
     allContentfulBlogPosts(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
@@ -152,7 +164,6 @@ const BlogPage = (props) => {
 
   useEffect(() => {
     const pages = [];
-
     for (let i=1; i<=numPages; i++) {
       pages.push(i);
     }
@@ -160,7 +171,6 @@ const BlogPage = (props) => {
     setPageArray(pages);
 
     const parallax = new Parallax();
-
     parallax.setVars();
   }, []);
 
@@ -210,6 +220,12 @@ const BlogPage = (props) => {
       ))}
       {numPages > 1 &&
         <Pagination>
+          {currentPage !== 1 && (
+            <>
+            <PaginationArrow icon={faChevronLeft} />
+            <PaginationText to={currentPage === 2 ? "/" : `/strona/${currentPage - 1}`}>previous</PaginationText>
+            </>
+          )}
           {pageArray.map(element => (
             element !== currentPage ? (
             <PaginationLink to={element === 1 ? "/" : `/strona/${element}`} key={element}>{element}</PaginationLink>
@@ -217,6 +233,12 @@ const BlogPage = (props) => {
             <PaginationItem key={element}>{element}</PaginationItem>
             )
           ))}
+          {currentPage !== pageArray.length && (
+            <>
+            <PaginationText to={`/strona/${currentPage + 1}`}>next</PaginationText>
+            <PaginationArrow icon={faChevronRight} />
+            </>
+          )}
         </Pagination>
       }
     </Layout>
