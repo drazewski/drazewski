@@ -7,6 +7,7 @@ module.exports = {
     title: "Lukasz Drazewski - Personal Blog",
     description: "",
     author: "Lukasz Drazewski",
+    siteUrl: "https://drazewski.github.io/",
   },
   plugins: [
     {
@@ -26,6 +27,7 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-eslint",
     "gatsby-plugin-image",
+    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
