@@ -29,7 +29,7 @@ const Tag = styled.span`
   font-family: 'Open sans';
   padding: 2px 16px 4px;
   border-radius: 20px;
-  margin-right: 10px;
+  margin: 10px 10px 0 0;
   border: 1px solid #84b3f9ed;
   transition: 0.4s all;
 `;
@@ -132,6 +132,11 @@ const PaginationArrow = styled(FontAwesomeIcon)`
   padding-top: 2px;
 `;
 
+const Tags = styled.span`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
 export const posts = graphql`
   query posts($limit: Int, $skip: Int) {
     allContentfulBlogPosts(limit: $limit, sort: {order: DESC, fields: date}, skip: $skip) {
@@ -163,16 +168,18 @@ const BlogPage = (props) => {
   const { currentPage, numPages } = props.pageContext;
 
   useEffect(() => {
+    const parallax = new Parallax();
+    parallax.setVars();
+  }, []);
+
+  useEffect(() => {
     const pages = [];
     for (let i=1; i<=numPages; i++) {
       pages.push(i);
     }
 
     setPageArray(pages);
-
-    const parallax = new Parallax();
-    parallax.setVars();
-  }, []);
+  }, [currentPage, numPages]);
 
   return (
     <Layout>
@@ -204,15 +211,15 @@ const BlogPage = (props) => {
                 </Link>
               </Flex>
               <ArticleFooter>
-                <span>
+                <Tags>
                   {post.node?.tagi?.length > 0 && post.node.tagi.map(tag => (
                     <Tag key={tag}>{tag}</Tag>
                   ))}
-                </span>
-                <span data-disqus-identifier={post.node.slug} />
-                <Link to={`/blog/${post.node.slug}#disqus_thread`}>
-                  {/* <span data-disqus-identifier={post.node.slug} /> */}
-                </Link>
+                </Tags>
+                {/* <span data-disqus-identifier={post.node.slug} /> */}
+                {/*<Link to={`/blog/${post.node.slug}#disqus_thread`}>
+                   <span data-disqus-identifier={post.node.slug} /> 
+                </Link>*/}
               </ArticleFooter>
             </Article>
           </ArticleListItem>

@@ -139,21 +139,17 @@ const Article = styled.article`
 
 const IMG = styled(Image)`
   margin: 30px auto;
-  max-width: 600px;
+  max-width: 100%;
   max-height: 75vh;
+
+  @media(min-width: ${sizes.sm}) {
+    max-width: 600px;
+  }
 
   & img {
     object-fit: contain !important;
     margin: auto;
     max-width: 100%;
-
-    @media(min-width: ${sizes.sm}) {
-      max-width: 75%;
-    }
-
-    @media(min-width: ${sizes.md}) {
-      max-width: 50%;
-    }
   }
 `;
 
