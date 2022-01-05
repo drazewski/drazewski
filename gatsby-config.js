@@ -27,7 +27,25 @@ module.exports = {
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-eslint",
     "gatsby-plugin-image",
-    "gatsby-plugin-sitemap",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        exclude: ["/kontakt", "/about"],
+        serialize: ({ site, allSitePage }) => {
+          return allSitePage.edges
+            .filter(({ node }) => (
+              node.context.isCanonical !== false
+            ))
+            .map(({ node }) => {
+              return {
+                url: site.siteMetadata.siteUrl + node.path,
+                changefreq: node.path?.includes("blog") ? "monthly" : "daily",
+                priority: 0.7,
+              };
+            });
+        },
+      },
+    },
     {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
